@@ -1,0 +1,200 @@
+<?xml version = "1.0" encoding="Windows-1252" standalone="yes"?>
+<VFPData>
+	<xsd:schema id="VFPData" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="VFPData" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="fxupersist_4hg102ekr" minOccurs="0" maxOccurs="unbounded">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="userid">
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:maxLength value="15"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="setting">
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:maxLength value="2147483647"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+				<xsd:anyAttribute namespace="http://www.w3.org/XML/1998/namespace" processContents="lax"/>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.Top = 173</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.Left = 498</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.Height = IIF(VERSION(5)&gt;=900,480,480)</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.Width = IIF(VERSION(5)&gt;=900,803,803)</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.inZoomTop = .F.</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.inZoomLeft = .F.</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.inZoomHeight = .F.</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.inZoomWidth = .F.</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.inZoomWindowState = 0</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.pgfDetails.ActivePage = 1</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.grdTests.FontName = "Tahoma"</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.grdTests.FontSize = 9</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.grdTests.FontBold = .F.</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.grdTests.FontItalic = .F.</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.pgfDetails.pgFailuresAndErrors.FontName = "Arial"</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.pgfDetails.pgFailuresAndErrors.FontSize = 9</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.pgfDetails.pgFailuresAndErrors.FontBold = .F.</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.pgfDetails.pgFailuresAndErrors.FontItalic = .F.</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.pgfDetails.pgFailuresAndErrors.edtFailuresAndErrors.FontName = "Courier New"</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.pgfDetails.pgFailuresAndErrors.edtFailuresAndErrors.FontSize = 9</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.pgfDetails.pgFailuresAndErrors.edtFailuresAndErrors.FontBold = .F.</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.pgfDetails.pgFailuresAndErrors.edtFailuresAndErrors.FontItalic = .F.</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.pgfDetails.pgMessages.FontName = "Arial"</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.pgfDetails.pgMessages.FontSize = 9</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.pgfDetails.pgMessages.FontBold = .F.</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.pgfDetails.pgMessages.FontItalic = .F.</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.pgfDetails.pgMessages.edtMessages.FontName = "Courier New"</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.pgfDetails.pgMessages.edtMessages.FontSize = 9</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.pgfDetails.pgMessages.edtMessages.FontBold = .F.</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.pgfDetails.pgMessages.edtMessages.FontItalic = .F.</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.ilLargeGrid=.F.</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.grdTests.Column1.Width = 208</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.grdTests.Column2.Width = 550</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>SET ORDER TO TAG TCLOC IN (THIS.icGridRS)</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>=SEEK("STRINGTESTS                                                                                                   TESTOBJECTWASCREATED                                                                                                              ",THIS.icGridRS,"TCLName")</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.ilAllowDebug = .F.</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.ShowTips = .T.</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.ilHonorTestPrefix = .F.</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.ilReloadTestsOnRun = .F.</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.ilCloseDebuggerAtEndOfTestsRun = .F.</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.nSplitterPosition = 226</setting>
+	</fxupersist_4hg102ekr>
+	<fxupersist_4hg102ekr>
+		<userid>Eric Selje</userid>
+		<setting>THIS.iResetResults = .T.</setting>
+	</fxupersist_4hg102ekr>
+</VFPData>
