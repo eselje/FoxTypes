@@ -1,15 +1,16 @@
 **********************************************************************
-DEFINE CLASS StringTests as FxuTestCase OF FxuTestCase.prg
+DEFINE CLASS StringTests AS FxuTestCase OF FxuTestCase.prg
 **********************************************************************
-	#IF .f.
-	*
-	*  this LOCAL declaration enabled IntelliSense for
-	*  the THIS object anywhere in this class
-	*
-	LOCAL THIS AS StringTests OF StringTests.PRG
+
+	#IF .F.
+		*
+		*  this LOCAL declaration enabled IntelliSense for
+		*  the THIS object anywhere in this class
+		*
+		LOCAL THIS AS StringTests OF StringTests.prg
 	#ENDIF
-	
-	*  
+
+	*
 	*  declare properties here that are used by one or
 	*  more individual test methods of this class
 	*
@@ -34,20 +35,20 @@ DEFINE CLASS StringTests as FxuTestCase OF FxuTestCase.prg
 	*
 	* This makes it possible to create ancillary methods in your test classes
 	* that can be shared amongst other test methods without being run as
-	* tests themselves. Additionally, this means you can quickly and easily 
+	* tests themselves. Additionally, this means you can quickly and easily
 	* disable a test by modifying it and changing it's test prefix from
 	* that specified by the icTestPrefix property
-	
+
 	* Additionally, you could set this in the INIT() method of your derived class
 	* but make sure you dodefault() first. When the option to run only
 	* tests with the icTestPrefix specified is checked in the options form,
 	* the test classes are actually all instantiated individually to pull
 	* the icTestPrefix value.
 
-*!*		icTestPrefix = "<Your preferred prefix here>"
-	
+	*!*		icTestPrefix = "<Your preferred prefix here>"
+
 	********************************************************************
-	FUNCTION Setup
+	FUNCTION SETUP
 	********************************************************************
 	*
 	*  put common setup code here -- this method is called
@@ -58,19 +59,19 @@ DEFINE CLASS StringTests as FxuTestCase OF FxuTestCase.prg
 	*  do NOT call THIS.Assert..() methods here -- this is
 	*  NOT a test method
 	*
-    *  for example, you can instantiate all the object(s)
-    *  you will be testing by the custom test methods of 
-    *  this class:
-    
+	*  for example, you can instantiate all the object(s)
+	*  you will be testing by the custom test methods of
+	*  this class:
+
 	THIS.icSetClassLib = SET("CLASSLIB")
-	SET PROCEDURE TO string.prg ADDITIVE
-	
+	SET PROCEDURE TO STRING.prg ADDITIVE
+
 	THIS.ioObjectToBeTested = CREATEOBJECT("String")
 
 	********************************************************************
 	ENDFUNC
 	********************************************************************
-	
+
 	********************************************************************
 	FUNCTION TearDown
 	********************************************************************
@@ -83,23 +84,23 @@ DEFINE CLASS StringTests as FxuTestCase OF FxuTestCase.prg
 	*  do NOT call THIS.Assert..() methods here -- this is
 	*  NOT a test method
 	*
-    *  for example, you can release  all the object(s)
-    *  you will be testing by the custom test methods of 
-    *  this class:
-    THIS.ioObjectToBeTested = .NULL.
+	*  for example, you can release  all the object(s)
+	*  you will be testing by the custom test methods of
+	*  this class:
+	THIS.ioObjectToBeTested = .NULL.
 	LOCAL lcSetClassLib
 	lcSetClassLib = THIS.icSetClassLib
-	SET CLASSLIB TO &lcSetClassLib        
+	SET CLASSLIB TO &lcSetClassLib
 
 	********************************************************************
 	ENDFUNC
-	********************************************************************	
+	********************************************************************
 
 	*
 	*  test methods can use any method name not already used by
 	*  the parent FXUTestCase class
 	*    MODIFY COMMAND FXUTestCase
-	*  DO NOT override any test methods except for the abstract 
+	*  DO NOT override any test methods except for the abstract
 	*  test methods Setup() and TearDown(), as described above
 	*
 	*  the three important inherited methods that you call
@@ -109,7 +110,7 @@ DEFINE CLASS StringTests as FxuTestCase OF FxuTestCase.prg
 	*    THIS.AssertNotNull("Failure message",<Expression>)
 	*  all test methods either pass or fail -- the assertions
 	*  either succeed or fail
-    
+
 	*
 	*  here's a simple AssertNotNull example test method
 	*
@@ -122,36 +123,132 @@ DEFINE CLASS StringTests as FxuTestCase OF FxuTestCase.prg
 	ENDFUNC
 	*********************************************************************
 
-	*
-	*  here's one for AssertTrue
-	*
-*!*		*********************************************************************
-*!*		FUNCTION TestObjectCustomMethod 
-*!*		*********************************************************************
-*!*		THIS.AssertTrue(THIS.ioObjectToBeTested.CustomMethod()), ;
-			"Object.CustomMethod() failed")
-*!*		*********************************************************************
-*!*		ENDFUNC
-*!*		*********************************************************************
 
-	*
-	*  and one for AssertEquals
-	*
-*!*		*********************************************************************
-*!*		FUNCTION TestObjectCustomMethod100ReturnValue 
-*!*		*********************************************************************
-*!*
-*!*		* Please note that string Comparisons with AssertEquals are
-*!*		* case sensitive. 
-*!*
-*!*		THIS.AssertEquals("John Smith", ;
-*!*			            THIS.ioObjectToBeTested.Object.CustomMethod100(), ;
-*!*			            "Object.CustomMethod100() did not return 'John Smith'",
-*!*		*********************************************************************
-*!*		ENDFUNC
-*!*		*********************************************************************
+	FUNCTION TestStringOneParameter
+	LOCAL _String
+	_String =  THIS.ioObjectToBeTested
+	cResult = _String.FORMAT("This is a {0}.", "test")
+	* Ideally we'd test these against C#'s results
+	cExpected = "This is a test."
+	RETURN THIS.AssertEquals(cResult, cExpected, "The strings do not match")
+
+	ENDFUNC
 
 
-**********************************************************************
+	FUNCTION TestStringOneParameterReused
+	LOCAL _String
+	_String =  THIS.ioObjectToBeTested
+	cResult = _String.FORMAT("We have nothing to {0} but {0} itself.", "fear")
+	* Ideally we'd test these against C#'s results
+	cExpected = "We have nothing to fear but fear itself."
+	RETURN THIS.AssertEquals(cResult, cExpected, "The strings do not match")
+
+	ENDFUNC
+
+
+	FUNCTION TestStringMultipleStringParameters
+	LOCAL _String
+	_String =  THIS.ioObjectToBeTested
+	cResult = _String.FORMAT("The {0} in {1} falls {2} on the {3}.", "rain", "Spain", "mainly", "plain")
+	* Ideally we'd test these against C#'s results
+	cExpected = "The rain in Spain falls mainly on the plain."
+	RETURN THIS.AssertEquals(cResult, cExpected, "The strings do not match")
+
+	ENDFUNC
+
+
+	FUNCTION TestShortDateFormat
+	&& 'd'	Short date 	10/12/2002
+	RETURN THIS.AssertNotImplemented()
+
+	FUNCTION TestLongDateFormat
+	&& 'D'	Long date 	December 10, 2002.  Can't use @YL
+	RETURN THIS.AssertNotImplemented()
+
+	FUNCTION TestFullDateAndTime
+	&& 'f'	Full date & time 	December 10, 2002 10:11 PM
+	RETURN THIS.AssertNotImplemented()
+
+	FUNCTION TestLongFullDateAndTime
+	&& 'F'	Full date & time (long) 	December 10, 2002 10:11:29 PM
+	RETURN THIS.AssertNotImplemented()
+
+	FUNCTION TestDefaultDateAndTime
+	&& 'g'	Default date & time 	10/12/2002 10:11 PM
+	RETURN THIS.AssertNotImplemented()
+
+	FUNCTION TestLongDefaultDateAndTime
+	&& 'G'	Default date & time (long) 	10/12/2002 10:11:29 PM
+	RETURN THIS.AssertNotImplemented()
+
+	FUNCTION TestMonthDay
+	&& 'M'	Month day pattern 	December 10
+	RETURN THIS.AssertNotImplemented()
+
+	FUNCTION TestRFC1123
+	&& 'r'	RFC1123 date string 	Tue, 10 Dec 2002 22:11:29 GMT
+	RETURN THIS.AssertNotImplemented()
+
+	FUNCTION TestSortableDateString
+	&& 's'	Sortable date string 	2002-12-10T22:11:29
+	RETURN THIS.AssertNotImplemented()
+
+	FUNCTION TestShortTime
+	&& 't'	Short time 	10:11 PM
+	RETURN THIS.AssertNotImplemented()
+
+	FUNCTION TestLongTime
+	&& 'T'	Long time 	10:11:29 PM
+	RETURN THIS.AssertNotImplemented()
+
+	FUNCTION TestUniversalSortableLocalTime
+	&& 'u'	Universal sortable, local time 	2002-12-10 22:13:50Z
+	RETURN THIS.AssertNotImplemented()
+
+	FUNCTION TestUniversaleSortableGMT
+	&& 'U'	Universal sortable, GMT 	December 11, 2002 3:13:50 AM
+	RETURN THIS.AssertNotImplemented()
+
+	FUNCTION TestYearMonth
+	&& 'Y'	&& 	Year month pattern 	December, 2002
+	RETURN THIS.AssertNotImplemented()
+
+	FUNCTION TestDecimal
+	&& 'D'
+	RETURN THIS.AssertNotImplemented()
+
+	FUNCTION TestExponential
+	&& 'E'	&& Exponential
+	RETURN THIS.AssertNotImplemented()
+
+	FUNCTION TestCurrency
+	&& 'C'	&& Currency
+	RETURN THIS.AssertNotImplemented()
+
+	FUNCTION TestPercentage
+	&& 'P'	&& Pctg
+	RETURN THIS.AssertNotImplemented()
+
+	FUNCTION TestFixedDecimals
+	&& 'F'
+	RETURN THIS.AssertNotImplemented()
+
+	FUNCTION TestGeneral
+	&& 'G'
+	RETURN THIS.AssertNotImplemented()
+
+	FUNCTION TestNumeric
+	&& 'N'
+	RETURN THIS.AssertNotImplemented()
+
+	FUNCTION TestRound
+	&& 'R'
+	RETURN THIS.AssertNotImplemented()
+
+	FUNCTION TestHex
+	&& 'X' Hex 
+	RETURN THIS.AssertNotImplemented()
+
+	**********************************************************************
 ENDDEFINE
 **********************************************************************
