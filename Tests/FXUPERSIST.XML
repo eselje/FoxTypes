@@ -4,7 +4,7 @@
 		<xsd:element name="VFPData" msdata:IsDataSet="true">
 			<xsd:complexType>
 				<xsd:choice maxOccurs="unbounded">
-					<xsd:element name="fxupersist_4hi0m2rx7" minOccurs="0" maxOccurs="unbounded">
+					<xsd:element name="fxupersist_4qu0oq2lt" minOccurs="0" maxOccurs="unbounded">
 						<xsd:complexType>
 							<xsd:sequence>
 								<xsd:element name="userid">
@@ -29,172 +29,356 @@
 			</xsd:complexType>
 		</xsd:element>
 	</xsd:schema>
-	<fxupersist_4hi0m2rx7>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.Top = 99</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.Left = 526</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.Height = IIF(VERSION(5)&gt;=900,813,504)</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.Width = IIF(VERSION(5)&gt;=900,854,803)</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.inZoomTop = .F.</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.inZoomLeft = .F.</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.inZoomHeight = .F.</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.inZoomWidth = .F.</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.inZoomWindowState = 0</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.pgfDetails.ActivePage = 1</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.grdTests.FontName = "Tahoma"</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.grdTests.FontSize = 9</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.grdTests.FontBold = .F.</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.grdTests.FontItalic = .F.</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.pgfDetails.pgFailuresAndErrors.FontName = "Tahoma"</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.pgfDetails.pgFailuresAndErrors.FontSize = 9</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.pgfDetails.pgFailuresAndErrors.FontBold = .T.</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.pgfDetails.pgFailuresAndErrors.FontItalic = .F.</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.pgfDetails.pgFailuresAndErrors.edtFailuresAndErrors.FontName = "Tahoma"</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.pgfDetails.pgFailuresAndErrors.edtFailuresAndErrors.FontSize = 9</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.pgfDetails.pgFailuresAndErrors.edtFailuresAndErrors.FontBold = .F.</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.pgfDetails.pgFailuresAndErrors.edtFailuresAndErrors.FontItalic = .F.</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.pgfDetails.pgMessages.FontName = "Tahoma"</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.pgfDetails.pgMessages.FontSize = 9</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.pgfDetails.pgMessages.FontBold = .F.</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.pgfDetails.pgMessages.FontItalic = .F.</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.pgfDetails.pgMessages.edtMessages.FontName = "Tahoma"</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.pgfDetails.pgMessages.edtMessages.FontSize = 9</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.pgfDetails.pgMessages.edtMessages.FontBold = .F.</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.pgfDetails.pgMessages.edtMessages.FontItalic = .F.</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.ilLargeGrid=.F.</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.grdTests.COLUMN1.Width = 208</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.grdTests.COLUMN2.Width = 601</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>SET ORDER TO TAG TCLOC IN (THIS.icGridRS)</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>=SEEK("STRINGTESTS                                                                                                   TESTSHORTDATEFORMAT                                                                                                               ",THIS.icGridRS,"TCLName")</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.ilAllowDebug = .T.</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.ShowTips = .F.</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.ilHonorTestPrefix = .F.</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.ilReloadTestsOnRun = .F.</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.ilCloseDebuggerAtEndOfTestsRun = .T.</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.nSplitterPosition = 398</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.iResetResults = .T.</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.inColorPass = 8454016</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric</userid>
+		<setting>THIS.inColorFail = 128</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
-		<setting>THIS.Top = 173</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+		<setting>THIS.Top = 153</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
-		<setting>THIS.Left = 498</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+		<setting>THIS.Left = 2295</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
-		<setting>THIS.Height = IIF(VERSION(5)&gt;=900,480,480)</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+		<setting>THIS.Height = IIF(VERSION(5)&gt;=900,554,504)</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
-		<setting>THIS.Width = IIF(VERSION(5)&gt;=900,803,803)</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+		<setting>THIS.Width = IIF(VERSION(5)&gt;=900,894,803)</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.inZoomTop = .F.</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.inZoomLeft = .F.</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.inZoomHeight = .F.</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.inZoomWidth = .F.</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.inZoomWindowState = 0</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.pgfDetails.ActivePage = 1</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.grdTests.FontName = "Tahoma"</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.grdTests.FontSize = 9</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.grdTests.FontBold = .F.</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.grdTests.FontItalic = .F.</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.pgfDetails.pgFailuresAndErrors.FontName = "Arial"</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.pgfDetails.pgFailuresAndErrors.FontSize = 9</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
-		<setting>THIS.pgfDetails.pgFailuresAndErrors.FontBold = .F.</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+		<setting>THIS.pgfDetails.pgFailuresAndErrors.FontBold = .T.</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.pgfDetails.pgFailuresAndErrors.FontItalic = .F.</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.pgfDetails.pgFailuresAndErrors.edtFailuresAndErrors.FontName = "Courier New"</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.pgfDetails.pgFailuresAndErrors.edtFailuresAndErrors.FontSize = 9</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.pgfDetails.pgFailuresAndErrors.edtFailuresAndErrors.FontBold = .F.</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.pgfDetails.pgFailuresAndErrors.edtFailuresAndErrors.FontItalic = .F.</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.pgfDetails.pgMessages.FontName = "Arial"</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.pgfDetails.pgMessages.FontSize = 9</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.pgfDetails.pgMessages.FontBold = .F.</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.pgfDetails.pgMessages.FontItalic = .F.</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.pgfDetails.pgMessages.edtMessages.FontName = "Courier New"</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.pgfDetails.pgMessages.edtMessages.FontSize = 9</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.pgfDetails.pgMessages.edtMessages.FontBold = .F.</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.pgfDetails.pgMessages.edtMessages.FontItalic = .F.</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.ilLargeGrid=.F.</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.grdTests.COLUMN1.Width = 208</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
-		<setting>THIS.grdTests.COLUMN2.Width = 550</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+		<setting>THIS.grdTests.COLUMN2.Width = 641</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
-		<setting>SET ORDER TO TAG TCLOC IN (THIS.icGridRS)</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+		<setting>SET ORDER TO TAG  IN (THIS.icGridRS)</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
-		<setting>=SEEK("STRINGTESTS                                                                                                   TESTOBJECTWASCREATED                                                                                                              ",THIS.icGridRS,"TCLName")</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+		<setting>=SEEK("STRINGTESTS                                                                                                   TESTSTRINGONEPARAMETER                                                                                                            ",THIS.icGridRS,"TCLName")</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.ilAllowDebug = .F.</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.ShowTips = .T.</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
-		<setting>THIS.ilHonorTestPrefix = .F.</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+		<setting>THIS.ilHonorTestPrefix = .T.</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.ilReloadTestsOnRun = .F.</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
-		<setting>THIS.ilCloseDebuggerAtEndOfTestsRun = .F.</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+		<setting>THIS.ilCloseDebuggerAtEndOfTestsRun = .T.</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
-		<setting>THIS.nSplitterPosition = 226</setting>
-	</fxupersist_4hi0m2rx7>
-	<fxupersist_4hi0m2rx7>
+		<setting>THIS.nSplitterPosition = 246</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
 		<userid>Eric Selje</userid>
 		<setting>THIS.iResetResults = .T.</setting>
-	</fxupersist_4hi0m2rx7>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric Selje</userid>
+		<setting>THIS.inColorPass = 16777088</setting>
+	</fxupersist_4qu0oq2lt>
+	<fxupersist_4qu0oq2lt>
+		<userid>Eric Selje</userid>
+		<setting>THIS.inColorFail = 128</setting>
+	</fxupersist_4qu0oq2lt>
 </VFPData>
