@@ -67,7 +67,7 @@ DEFINE CLASS StringTests AS FxuTestCase OF FxuTestCase.prg
 	SET PROCEDURE TO STRING.prg ADDITIVE
 
 	THIS.ioObjectToBeTested = CREATEOBJECT("String")
-
+	ADDPROPERTY(_vfp, "STRING", THIS.ioObjectToBeTested)
 	********************************************************************
 	ENDFUNC
 	********************************************************************
@@ -88,6 +88,8 @@ DEFINE CLASS StringTests AS FxuTestCase OF FxuTestCase.prg
 	*  you will be testing by the custom test methods of
 	*  this class:
 	THIS.ioObjectToBeTested = .NULL.
+	REMOVEPROPERTY(_Vfp, "STRING")
+
 	LOCAL lcSetClassLib
 	lcSetClassLib = THIS.icSetClassLib
 	SET CLASSLIB TO &lcSetClassLib
@@ -117,42 +119,48 @@ DEFINE CLASS StringTests AS FxuTestCase OF FxuTestCase.prg
 	*********************************************************************
 	FUNCTION TestObjectWasCreated
 	*********************************************************************
-	THIS.AssertNotNull(THIS.ioObjectToBeTested, ;
-		"Object was not instantiated during Setup()")
+	
+	THIS.AssertNotNull(THIS.ioObjectToBeTested, "Object was not instantiated during Setup()")
 	*********************************************************************
 	ENDFUNC
 	*********************************************************************
 
 
 	FUNCTION TestStringOneParameter
-	LOCAL _String
-	_String =  THIS.ioObjectToBeTested
-	cResult = _String.FORMAT("This is a {0}.", "test")
+	cResult = _vfp.String.FORMAT("Welcome to Southwest Fox {0}.", 2016)
 	* Ideally we'd test these against C#'s results
-	cExpected = "This is a test."
-	RETURN THIS.AssertEquals(cResult, cExpected, "The strings do not match")
+	cExpected = "Welcome to Southwest Fox 2016."
+	RETURN THIS.AssertEquals(cExpected, cResult, "The strings do not match")
 
 	ENDFUNC
 
 
 	FUNCTION TestStringOneParameterReused
-	LOCAL _String
-	_String =  THIS.ioObjectToBeTested
-	cResult = _String.FORMAT("We have nothing to {0} but {0} itself.", "fear")
-	* Ideally we'd test these against C#'s results
+	cResult = _vfp.String.FORMAT("We have nothing to {0} but {0} itself.", "fear")
 	cExpected = "We have nothing to fear but fear itself."
-	RETURN THIS.AssertEquals(cResult, cExpected, "The strings do not match")
+	RETURN THIS.AssertEquals(cExpected, cResult, "The strings do not match")
 
 	ENDFUNC
 
 
 	FUNCTION TestStringMultipleStringParameters
-	LOCAL _String
-	_String =  THIS.ioObjectToBeTested
-	cResult = _String.FORMAT("The {0} in {1} falls {2} on the {3}.", "rain", "Spain", "mainly", "plain")
-	* Ideally we'd test these against C#'s results
+	cResult = _vfp.String.FORMAT("The {0} in {1} falls {2} on the {3}.", "rain", "Spain", "mainly", "plain")
 	cExpected = "The rain in Spain falls mainly on the plain."
-	RETURN THIS.AssertEquals(cResult, cExpected, "The strings do not match")
+	RETURN THIS.AssertEquals(cExpected, cResult, "The strings do not match")
+
+	ENDFUNC
+
+	FUNCTION TestNullParameters
+	cResult = _vfp.String.FORMAT("What does {0} equal?", .null.)
+	RETURN THIS.AssertHasError("String.Format handled null beautifully.")
+
+	ENDFUNC
+
+
+	FUNCTION TestUnusedParameters
+	cResult = _vfp.String.FORMAT("My favorite Stones album is {1}.", "Exile on Main St.", "Let it Bleed")
+	cExpected = "My favorite Stones album is Let it Bleed."
+	RETURN THIS.AssertEquals(cExpected, cResult, "The strings do not match")
 
 	ENDFUNC
 
@@ -248,6 +256,112 @@ DEFINE CLASS StringTests AS FxuTestCase OF FxuTestCase.prg
 	FUNCTION TestHex
 	&& 'X' Hex 
 	RETURN THIS.AssertNotImplemented()
+
+
+  FUNCTION testNewTest
+	* 1. Change the name of the test to reflect its purpose. Test one thing only.
+	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
+  RETURN This.AssertNotImplemented()
+
+
+
+
+
+
+  FUNCTION testNewTest
+	* 1. Change the name of the test to reflect its purpose. Test one thing only.
+	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
+  RETURN This.AssertNotImplemented()
+
+  ENDFUNC
+
+
+  FUNCTION testNewTest
+	* 1. Change the name of the test to reflect its purpose. Test one thing only.
+	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
+  RETURN This.AssertNotImplemented()
+
+  ENDFUNC
+
+
+  FUNCTION testNewTest
+	* 1. Change the name of the test to reflect its purpose. Test one thing only.
+	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
+  RETURN This.AssertNotImplemented()
+
+  ENDFUNC
+
+
+  FUNCTION testNewTest
+	* 1. Change the name of the test to reflect its purpose. Test one thing only.
+	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
+  RETURN This.AssertNotImplemented()
+
+  ENDFUNC
+
+
+  FUNCTION testNewTest
+	* 1. Change the name of the test to reflect its purpose. Test one thing only.
+	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
+  RETURN This.AssertNotImplemented()
+
+  ENDFUNC
+
+
+  FUNCTION testNewTest
+	* 1. Change the name of the test to reflect its purpose. Test one thing only.
+	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
+  RETURN This.AssertNotImplemented()
+
+  ENDFUNC
+
+
+  FUNCTION testNewTest
+	* 1. Change the name of the test to reflect its purpose. Test one thing only.
+	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
+  RETURN This.AssertNotImplemented()
+
+  ENDFUNC
+
+
+  FUNCTION testNewTest
+	* 1. Change the name of the test to reflect its purpose. Test one thing only.
+	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
+  RETURN This.AssertNotImplemented()
+
+  ENDFUNC
+
+
+  FUNCTION testNewTest
+	* 1. Change the name of the test to reflect its purpose. Test one thing only.
+	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
+  RETURN This.AssertNotImplemented()
+
+  ENDFUNC
+
+
+  FUNCTION testNewTest
+	* 1. Change the name of the test to reflect its purpose. Test one thing only.
+	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
+  RETURN This.AssertNotImplemented()
+
+  ENDFUNC
+
+
+  FUNCTION testNewTest
+	* 1. Change the name of the test to reflect its purpose. Test one thing only.
+	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
+  RETURN This.AssertNotImplemented()
+
+  ENDFUNC
+
+
+  FUNCTION testNewTest
+	* 1. Change the name of the test to reflect its purpose. Test one thing only.
+	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
+  RETURN This.AssertNotImplemented()
+
+  ENDFUNC
 
 	**********************************************************************
 ENDDEFINE
