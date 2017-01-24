@@ -33,6 +33,12 @@ DEFINE CLASS String AS CUSTOM
 		LPARAMETERS dtConvert, cFormat
 		LOCAL cDate, cCentury, dConvert, cResult
 		cResult = ""
+
+		*-- [Matt Slay: 2017-01-22]--
+		If IsNull(dtConvert)
+			Return ""
+		Endif
+
 		IF VARTYPE(dtConvert)="D"
 			dConvert = dtConvert
 			dtConvert = DTOT(dConvert)
