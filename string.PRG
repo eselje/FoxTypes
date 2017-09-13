@@ -27,12 +27,19 @@ DEFINE CLASS String AS CUSTOM
 				ENDCASE
 			ENDIF
 		ENDFOR
+		cReturn = STRTRAN(cReturn, "\n", CHR(10)+CHR(13))
 		RETURN cReturn
 
 	PROTECTED FUNCTION DateFormat
 		LPARAMETERS dtConvert, cFormat
 		LOCAL cDate, cCentury, dConvert, cResult
 		cResult = ""
+
+		*-- [Matt Slay: 2017-01-22]--
+		If IsNull(dtConvert)
+			Return ""
+		Endif
+
 		IF VARTYPE(dtConvert)="D"
 			dConvert = dtConvert
 			dtConvert = DTOT(dConvert)
@@ -140,11 +147,126 @@ DEFINE CLASS String AS CUSTOM
 				cResult=TRANSFORM(nConvert)
 			CASE cFormat='X'	&& Hex
 				cResult=TRANSFORM(nConvert, "@0")
+				
+			* ES Convert number to string
+			CASE cFormat = 'S' 	&& String
+				cResult = This.NumberToString(nConvert)
 		ENDCASE
 		
 		RETURN cResult
 
+	FUNCTION NumberToString
+	*********************************************************
+	** Author   : Ramani (Subramanian.G)
+	**           áFoxAcc Software / Winners Software
+	**            www.winnersoft.coolfreepages.com
+	** Type    á: Freeware with reservation to Copyrights
+	** Warranty : Nothing implied or explicit
+	** Last modified : June, 2003
+	*********************************************************
+	LPARAMETER amt
+	amt = ABS(amt)
+
+	IF amt > 999999999999.99 && => 1000 billion
+		=MESSAGEBOX("Amount exceeds word convertion provision. Contact system administrator", ;
+			0+16, "CAUTION. Check total amount !")
+	ENDIF
+	IF amt = 0
+		RETURN "Zero"
+	ENDIF
+	LOCAL lcNumPhrase, lcNumStr
+	LOCAL lcWord1, lcWord2, lcWord3, lcWord4, lcWord5, lcWord6, lcWord7, ;
+		lcWord8, lcWord9, lcWord10, lcWord11, lcWord12, lcWord13, lcWord14, ;
+		lcWord15, lcWord16, lcWord17, lcWord18, lcWord19, lcWord20, lcWord30, ;
+		lcWord40, lcWord50, lcWord60, lcWord70, lcWord80, lcWord90
+	lcWord1 = "One "
+	lcWord2 = "Two "
+	lcWord3 = "Three "
+	lcWord4 = "Four "
+	lcWord5 = "Five "
+	lcWord6 = "Six "
+	lcWord7 = "Seven "
+	lcWord8 = "Eight "
+	lcWord9 = "Nine "
+	lcWord10 = "Ten "
+	lcWord11 = "Eleven "
+	lcWord12 = "Twelve "
+	lcWord13 = "Thirteen "
+	lcWord14 = "Fourteen "
+	lcWord15 = "Fifteen "
+	lcWord16 = "Sixteen "
+	lcWord17 = "Seventeen "
+	lcWord18 = "Eighteen "
+	lcWord19 = "Ninteen "
+	lcWord20 = "Twenty "
+	lcWord30 = "Thirty "
+	lcWord40 = "Forty "
+	lcWord50 = "Fifty "
+	lcWord60 = "Sixty "
+	lcWord70 = "Seventy "
+	lcWord80 = "Eighty "
+	lcWord90 = "Ninety "
+	m.lcNumPhrase = ""
+	m.lcNumStr = STR(amt,17,4)
+	IF VAL(SUBSTR(m.lcNumStr,1,3)) > 0    && Amount in Billions
+		m.lcNumPhrase = m.lcNumPhrase + THIS.Numword(SUBSTR(m.lcNumStr,1,3)) + " Billion "
+	ENDIF
+	IF VAL(SUBSTR(m.lcNumStr,4,3)) > 0     && Amount in millions
+		m.lcNumPhrase = m.lcNumPhrase + THIS.Numword(SUBSTR(m.lcNumStr,4,3)) + " Million "
+	ENDIF
+	IF VAL(SUBSTR(m.lcNumStr,7,3)) > 0    && Amount in thousands
+		m.lcNumPhrase = m.lcNumPhrase + THIS.Numword(SUBSTR(m.lcNumStr,7,3)) + " Thousand "
+	ENDIF
+	IF VAL(SUBSTR(m.lcNumStr,10,3)) > 0    && Amount below thousands
+		m.lcNumPhrase = m.lcNumPhrase + THIS.Numword(SUBSTR(m.lcNumStr,10,3))
+	ENDIF
+	IF VAL(SUBSTR(m.lcNumStr,14,2)) > 0    && Amount in Decimals
+	** needs tingering depending on digits - Default is 2 decimals
+		IF LEN(ALLTRIM(m.lcNumPhrase)) > 1
+			m.lcNumPhrase = ALLTRIM(m.lcNumPhrase) + " and "
+		ELSE
+			m.lcNumPhrase = "Zero and "
+		ENDIF
+		m.lcNumPhrase = m.lcNumPhrase + SUBSTR(m.lcNumStr,14,2) + "/100"
+	ENDIF
+	RETURN m.lcNumPhrase
+
+	*********************************************************
+	** Called by: numtoword() (function  in NUMWORD.PRG)
+	*********************************************************
+	FUNCTION Numword
+	LPARAMETERS tStr
+
+	LOCAL lnStr, lcPhrase, lcStr
+	lcPhrase = " "
+	lnStr = VAL(tStr)
+
+	** Hundredth position
+	IF lnStr > 99
+		lcStr = LEFT(tStr,1)
+		lcPhrase = lcWord&lcStr + "Hundred "
+	ENDIF
+
+	** Balance Position
+	lnStr = VAL(RIGHT(tStr,2))
+	IF BETWEEN(lnStr,1,20)
+		lcStr = ALLTRIM(STR(lnStr))
+		lcPhrase = lcPhrase + lcWord&lcStr
+	ENDIF
+	IF BETWEEN(lnStr,21,99)
+		IF lnStr > 20
+			lcStr = SUBSTR(tStr,2,1)+"0"
+			lcPhrase = lcPhrase + lcWord&lcStr
+		ENDIF
+		IF RIGHT(tStr,1) > '0'
+			lcStr = RIGHT(tStr,1)
+			lcPhrase = lcPhrase + lcWord&lcStr
+		ENDIF
+	ENDIF
+	RETURN ALLTRIM(lcPhrase)
+	*********************************************************
+	* EOF: NUM2WORD.PRG
+	*********************************************************
 
 
 ENDDEFINE
-

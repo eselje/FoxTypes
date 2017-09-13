@@ -258,14 +258,26 @@ DEFINE CLASS StringTests AS FxuTestCase OF FxuTestCase.prg
 	RETURN THIS.AssertNotImplemented()
 
 
-  FUNCTION testNewTest
+  FUNCTION testNewLine
 	* 1. Change the name of the test to reflect its purpose. Test one thing only.
 	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
+ 	cResult = _vfp.String.FORMAT("This is line 1.\nThis is line 2")
+	cExpected = "This is line 1."+CHR(10)+CHR(13)+"This is line 2"
+	RETURN THIS.AssertEquals(cExpected, cResult, "The strings do not match")
+
   RETURN This.AssertNotImplemented()
 
 
 
 
+
+
+  FUNCTION testNewTest
+	* 1. Change the name of the test to reflect its purpose. Test one thing only.
+	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
+  RETURN This.AssertNotImplemented()
+
+  ENDFUNC
 
 
   FUNCTION testNewTest
