@@ -149,13 +149,13 @@ DEFINE CLASS String AS CUSTOM
 				cResult=TRANSFORM(nConvert, "@0")
 				
 			* ES Convert number to string
-			CASE cFormat = 'S' 	&& String
-				cResult = This.NumberToString(nConvert)
+			CASE cFormat = 'W' 	&& Words
+				cResult = This.NumberToWords(nConvert)
 		ENDCASE
 		
 		RETURN cResult
 
-	FUNCTION NumberToString
+	PROTECTED FUNCTION NumberToWords
 	*********************************************************
 	** Author   : Ramani (Subramanian.G)
 	**           ·FoxAcc Software / Winners Software
@@ -175,7 +175,7 @@ DEFINE CLASS String AS CUSTOM
 		RETURN "Zero"
 	ENDIF
 	LOCAL lcNumPhrase, lcNumStr
-	LOCAL lcWord1, lcWord2, lcWord3, lcWord4, lcWord5, lcWord6, lcWord7, ;
+	PRIVATE lcWord1, lcWord2, lcWord3, lcWord4, lcWord5, lcWord6, lcWord7, ;
 		lcWord8, lcWord9, lcWord10, lcWord11, lcWord12, lcWord13, lcWord14, ;
 		lcWord15, lcWord16, lcWord17, lcWord18, lcWord19, lcWord20, lcWord30, ;
 		lcWord40, lcWord50, lcWord60, lcWord70, lcWord80, lcWord90
@@ -234,7 +234,7 @@ DEFINE CLASS String AS CUSTOM
 	*********************************************************
 	** Called by: numtoword() (function  in NUMWORD.PRG)
 	*********************************************************
-	FUNCTION Numword
+	PROTECTED FUNCTION Numword
 	LPARAMETERS tStr
 
 	LOCAL lnStr, lcPhrase, lcStr
@@ -268,5 +268,8 @@ DEFINE CLASS String AS CUSTOM
 	* EOF: NUM2WORD.PRG
 	*********************************************************
 
-
+	FUNCTION toUpper
+	LPARAMETERS cString
+	RETURN UPPER(cString)
+	
 ENDDEFINE

@@ -176,10 +176,74 @@ DEFINE CLASS StringTest2 as FxuTestCase OF FxuTestCase.prg
   ENDFUNC
 
 
-  FUNCTION testNewTest
+  FUNCTION test0toWord
 	* 1. Change the name of the test to reflect its purpose. Test one thing only.
 	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
-  RETURN This.AssertNotImplemented()
+	cExpected = "Zero"
+	cResult = _vfp.String.Format("{0:W}", 0)
+  RETURN This.AssertEquals(cExpected, cResult, "Num2Word did not return the expected result")
+  
+
+  FUNCTION test1toWord
+	* 1. Change the name of the test to reflect its purpose. Test one thing only.
+	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
+	cExpected = "One"
+	cResult = _vfp.String.Format("{0:W}",1)
+  RETURN This.AssertEquals(cExpected, cResult, "Num2Word did not return the expected result")
+
+
+  FUNCTION test21toWord
+	* 1. Change the name of the test to reflect its purpose. Test one thing only.
+	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
+	cExpected = "Twenty One"
+	cResult = _vfp.String.Format("{0:W}", 21)
+  RETURN This.AssertEquals(cExpected, cResult, "Num2Word did not return the expected result")
+
+
+  FUNCTION test101toWord
+	* 1. Change the name of the test to reflect its purpose. Test one thing only.
+	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
+	cExpected = "One Hundred One"
+	cResult = _vfp.String.Format("{0:W}", 101)
+  RETURN This.AssertEquals(cExpected, cResult, "Num2Word did not return the expected result")
+
+  FUNCTION test1050toWord
+	* 1. Change the name of the test to reflect its purpose. Test one thing only.
+	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
+	cExpected = "One Thousand Fifty"
+	cResult = _vfp.String.Format("{0:W}", 1050)
+  RETURN This.AssertEquals(cExpected, cResult, "Num2Word did not return the expected result")
+
+
+  FUNCTION test100020toWord
+	* 1. Change the name of the test to reflect its purpose. Test one thing only.
+	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
+	cExpected = "One Hundred Thousand Twenty"
+	cResult = _vfp.String.Format("{0:W}", 100020)
+  RETURN This.AssertEquals(cExpected, cResult, "Num2Word did not return the expected result")
+
+
+  FUNCTION test1041232toWord
+	* 1. Change the name of the test to reflect its purpose. Test one thing only.
+	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
+	cExpected = "One Million Forty One Thousand Two Hundred Thirty Two"
+	cResult = _vfp.String.Format("{0:W}", 1041232)
+  RETURN This.AssertEquals(cExpected, cResult, "Num2Word did not return the expected result")
+
+
+  FUNCTION testPoint42toWord
+	* 1. Change the name of the test to reflect its purpose. Test one thing only.
+	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
+	cExpected = "Zero and 42/100"
+	cResult = _vfp.String.Format("{0:W}", .42)
+  RETURN This.AssertEquals(cExpected, cResult, "Num2Word did not return the expected result")
+
+  FUNCTION test1Point42toWord
+	* 1. Change the name of the test to reflect its purpose. Test one thing only.
+	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
+	cExpected = "One and 42/100"
+	cResult = _vfp.String.Format("{0:W}", 1.42)
+  RETURN This.AssertEquals(cExpected, cResult, "Num2Word did not return the expected result")
 
   ENDFUNC
 
