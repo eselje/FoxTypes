@@ -3,8 +3,41 @@
 #DEFINE StringSplitOptions_CaseInsensitive	8
 #DEFINE StringSplitOptions_IncludeParseChar 16
 
+#DEFINE StringCompareOptions_CaseInsensitive	1
+#DEFINE StringCompareOptions_Exact				2
 
-DEFINE CLASS String AS CUSTOM
+DEFINE CLASS Variable AS Custom 
+
+	FUNCTION toString
+	LPARAMETERS xValue
+	LOCAL cVarType, cString
+	cVarType = VARTYPE(xValue)
+	DO CASE
+		CASE INLIST(cVarType, 'C', 'M')
+			cString = xValue
+		CASE INLIST(cVarType, 'I', 'N', 'F')		
+			cString = STR(xValue)
+		CASE INLIST(cVarType, 'T')
+			cString = IIF(EMPTY(xValue), "", TTOC(xValue, 1))
+		CASE INLIST(cVarType, 'D')
+			cString = IIF(EMPTY(xValue), "", DTOC(xValue))
+	ENDCASE
+	RETURN cString
+		
+	
+	FUNCTION EmptyOrNull
+	LPARAMETERS xValue
+	LOCAL lReturn
+	lReturn = ! ISNULL(xValue)
+	IF lReturn
+		xValue = This.toString(xValue)
+		lReturn = EMPTY(xValue)
+	ENDIF
+	RETURN lReturn
+ENDDEFINE
+
+
+DEFINE CLASS String AS Variable
 
 	************************************************************
 	FUNCTION Format
@@ -348,4 +381,29 @@ DEFINE CLASS String AS CUSTOM
 	iRows =ALINES(aResult,cString,nFlags,cParseChar)
 	RETURN iRows 
 	
+
+	FUNCTION Contains
+	LPARAMETERS cString, cSubString, nFlags
+	LOCAL lCaseInsensitive, lExact, lReturn
+	cSubString=EVL(cSubString,"")
+	nFlags = EVL(nFlags,0)
+	lReturn = ! This.EmptyOrNull(cString)
+	IF lReturn
+		This.getComparisonFlags(nFlags, @lCaseInsensitive, @lExact)
+		IF lExact
+			lReturn = This.IndexOf(cSubString, cString, 1, ! lCaseInsensitive)>0
+		ELSE
+			lReturn = This.IndexOf(ALLTRIM(cSubString), ALLTRIM(cString), 1, ! lCaseInsensitive)>0
+		ENDIF
+	ENDIF
+	RETURN lReturn
+			
+	
+	PROTECTED FUNCTION getComparisonFlags
+	LPARAMETERS nFlags, lCaseSensitive, lExact
+	lCaseSensitive = BITTEST(nFlags,0)
+	lExact		   = BITTEST(nFlags,1)
+	
+	
+
 ENDDEFINE

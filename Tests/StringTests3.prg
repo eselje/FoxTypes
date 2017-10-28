@@ -1,3 +1,5 @@
+#DEFINE StringCompareOptions_CaseInsensitive	1
+#DEFINE StringCompareOptions_Exact				2
 
 **********************************************************************
 DEFINE CLASS StringTests3 AS FxuTestCase OF FxuTestCase.prg
@@ -132,5 +134,47 @@ DEFINE CLASS StringTests3 AS FxuTestCase OF FxuTestCase.prg
 	cActual = aNames[2]
 	RETURN This.AssertEquals(cExpected, cActual, "Split did not return what we expected.")
 
+
+  FUNCTION testContains
+	LOCAL cString 
+	cString = "Rick, Tamar, Doug"
+	lResult = _VFP.String.Contains(cString, "Rick")
+	RETURN This.AssertTrue(lResult, "Contains did not return what we expected.")
+
+  FUNCTION testContains_CaseInsensitive
+	LOCAL cString 
+	cString = "Rick, Tamar, Doug"
+	lResult = _VFP.String.Contains(cString, "RICK", StringCompareOptions_CaseInsensitive)
+	RETURN This.AssertTrue(lResult, "Contains did not return what we expected.")
+
+  FUNCTION testContains_Exact
+	LOCAL cString 
+	cString = "Rick, Tamar, Doug"
+	lResult = _VFP.String.Contains(cString, " Tamar ", StringCompareOptions_Exact)
+	RETURN This.AssertFalse(lResult, "Contains did not return what we expected.")
+
+  FUNCTION testContains_False
+	LOCAL cString 
+	cString = "Rick, Tamar, Doug"
+	lResult = _VFP.String.Contains(cString, "RICK")
+	RETURN This.AssertFalse(lResult, "String is there but we didn't specify case insensitive.")
+
+  ENDFUNC
+
+
+  FUNCTION testCompare
+  RETURN This.AssertNotImplemented()
+
+  ENDFUNC
+
+  FUNCTION testCompare_Exact
+  RETURN This.AssertNotImplemented()
+
+  ENDFUNC
+
+  FUNCTION testCompare_CaseSensitive
+  RETURN This.AssertNotImplemented()
+
+  ENDFUNC
 
 ENDDEFINE
