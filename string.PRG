@@ -1,3 +1,8 @@
+#DEFINE StringSplitOptions_IncludeLastElement 2
+#DEFINE StringSplitOptions_RemoveEmptyOptions 4
+#DEFINE StringSplitOptions_CaseInsensitive	8
+#DEFINE StringSplitOptions_IncludeParseChar 16
+
 
 DEFINE CLASS String AS CUSTOM
 
@@ -155,7 +160,7 @@ DEFINE CLASS String AS CUSTOM
 		
 		RETURN cResult
 
-	PROTECTED FUNCTION NumberToWords
+	FUNCTION NumberToWords
 	*********************************************************
 	** Author   : Ramani (Subramanian.G)
 	**           áFoxAcc Software / Winners Software
@@ -271,5 +276,76 @@ DEFINE CLASS String AS CUSTOM
 	FUNCTION toUpper
 	LPARAMETERS cString
 	RETURN UPPER(cString)
+
+	FUNCTION toLower
+	LPARAMETERS cString
+	RETURN LOWER(cString)
+
+	FUNCTION IndexOf
+	LPARAMETERS cSearchExpression, cExpressionSearched, nOccurrence, lCaseSensitive, lFromRight
+	LOCAL iReturn
+	IF VARTYPE(nOccurrence)!='N'
+		nOccurrence=EVL(nOccurrence,1)
+	ENDIF 
+	IF nOccurrence > 0
+		IF lFromRight
+			iReturn = IIF(lCaseSensitive, ;
+				RAT(cSearchExpression, cExpressionSearched, nOccurrence), ;
+				RATC(cSearchExpression, cExpressionSearched, nOccurrence))
+		ELSE && Normal
+			iReturn = IIF(lCaseSensitive, ;
+				AT(cSearchExpression, cExpressionSearched, nOccurrence), ;
+				ATC(cSearchExpression, cExpressionSearched, nOccurrence))
+		ENDIF
+	ELSE
+		iReturn = 0
+	ENDIF 
+	RETURN iReturn
+
+	FUNCTION LastIndexOf
+	LPARAMETERS cSearchExpression, cExpressionSearched, nOccurrence, lCaseSensitive
+	RETURN This.IndexOf(cSearchExpression, cExpressionSearched, nOccurrence, lCaseSensitive, .t.)
+	
+	
+	FUNCTION PadLeft
+	LPARAMETERS cString, iLength, cChar
+	cString = EVL(cString, '')
+	cChar=EVL(cChar, ' ')
+	iLength = MAX(LEN(cString),iLength)
+	RETURN PADL(cString, iLength, cChar)
+	
+	FUNCTION PadRight
+	LPARAMETERS cString, iLength, cChar
+	cString = EVL(cString, '')
+	cChar=EVL(cChar, ' ')
+	iLength = MAX(LEN(cString),iLength)
+	RETURN PADR(cString, iLength, cChar)
+
+	FUNCTION PadCenter
+	LPARAMETERS cString, iLength, cChar
+	cString = EVL(cString, '')
+	cChar=EVL(cChar, ' ')
+	iLength = MAX(LEN(cString),iLength)
+	RETURN PADC(cString, iLength, cChar)
+	
+	FUNCTION Replace
+	LPARAMETERS cString, cFind, cReplace, nStartOccurrence, nNumberOfOccurrences, nFlags
+	nStartOccurrence=EVL(nStartOccurrence,-1)
+	nNumberOfOccurrences=EVL(nNumberOfOccurrences,-1)
+	nFlags = EVL(nFlags,1)
+	
+	RETURN STRTRAN(cString, cFind, cReplace, nStartOccurrence, nNumberOfOccurrences, nFlags)
+	 
+	FUNCTION Extract
+	LPARAMETERS cSearchExpression, cBeginDelim, cEndDelim, nOccurrence, nFlags
+	RETURN STREXTRACT(cSearchExpression, cBeginDelim, cEndDelim, nOccurrence, nFlags)
+	
+	FUNCTION Split
+	LPARAMETERS aResult, cString, cParseChar, nFlags
+	LOCAL iRows
+	nFlags = EVL(nFlags,1)
+	cParseChar=EVL(cParseChar,' ')
+	iRows =ALINES(aResult,cString,nFlags,cParseChar)
+	RETURN iRows 
 	
 ENDDEFINE

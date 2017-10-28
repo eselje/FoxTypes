@@ -268,112 +268,102 @@ DEFINE CLASS StringTests AS FxuTestCase OF FxuTestCase.prg
   RETURN This.AssertNotImplemented()
 
 
-
-
-
-
-  FUNCTION testNewTest
-	* 1. Change the name of the test to reflect its purpose. Test one thing only.
-	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
-  RETURN This.AssertNotImplemented()
-
-  ENDFUNC
-
-
-  FUNCTION testNewTest
-	* 1. Change the name of the test to reflect its purpose. Test one thing only.
-	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
-  RETURN This.AssertNotImplemented()
+FUNCTION testStringLastIndexOf
+	LOCAL cSearchExpression, cExpressionSearched, nOccurrence, lCaseSensitive
+	cSearchExpression="Fox"
+	cExpressionSearched="The quick brown fox jumped over the lazy dog."
+	nOccurence=1
+	lCaseSensitive=.F.
+	cResult = _vfp.String.IndexOf(cSearchExpression, cExpressionSearched, nOccurrence, lCaseSensitive)
+	cExpected = 17
+	RETURN THIS.AssertEquals(cExpected, cResult, "Did not find [" +cSearchExpression + "] in [" + cExpressionSearched +"]")
 
   ENDFUNC
 
-
-  FUNCTION testNewTest
-	* 1. Change the name of the test to reflect its purpose. Test one thing only.
-	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
-  RETURN This.AssertNotImplemented()
-
-  ENDFUNC
-
-
-  FUNCTION testNewTest
-	* 1. Change the name of the test to reflect its purpose. Test one thing only.
-	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
-  RETURN This.AssertNotImplemented()
+FUNCTION testStringLastIndexOf_2ndOccurence
+	LOCAL cSearchExpression, cExpressionSearched, nOccurrence, lCaseSensitive
+	cSearchExpression="e"
+	cExpressionSearched="The quick brown fox jumped over the lazy dog."
+	nOccurrence=2
+	lCaseSensitive=.F.
+	cResult = _vfp.String.IndexOf(cSearchExpression, cExpressionSearched, nOccurrence, lCaseSensitive)
+	cExpected = 25
+	RETURN THIS.AssertEquals(cExpected, cResult, "Did not find [" +cSearchExpression + "] in [" + cExpressionSearched +"]")
 
   ENDFUNC
 
-
-  FUNCTION testNewTest
-	* 1. Change the name of the test to reflect its purpose. Test one thing only.
-	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
-  RETURN This.AssertNotImplemented()
-
-  ENDFUNC
-
-
-  FUNCTION testNewTest
-	* 1. Change the name of the test to reflect its purpose. Test one thing only.
-	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
-  RETURN This.AssertNotImplemented()
+FUNCTION testStringLastIndexOf_0thOccurence
+	LOCAL cSearchExpression, cExpressionSearched, nOccurrence, lCaseSensitive
+	cSearchExpression="e"
+	cExpressionSearched="The quick brown fox jumped over the lazy dog."
+	nOccurrence=0
+	lCaseSensitive=.F.
+	cResult = _vfp.String.IndexOf(cSearchExpression, cExpressionSearched, nOccurrence, lCaseSensitive)
+	cExpected = 0
+	RETURN THIS.AssertEquals(cExpected, cResult, "Did not find [" +cSearchExpression + "] in [" + cExpressionSearched +"]")
 
   ENDFUNC
 
-
-  FUNCTION testNewTest
-	* 1. Change the name of the test to reflect its purpose. Test one thing only.
-	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
-  RETURN This.AssertNotImplemented()
-
-  ENDFUNC
-
-
-  FUNCTION testNewTest
-	* 1. Change the name of the test to reflect its purpose. Test one thing only.
-	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
-  RETURN This.AssertNotImplemented()
+FUNCTION testStringLastIndexOf_CaseSensitive
+	LOCAL cSearchExpression, cExpressionSearched, nOccurrence, lCaseSensitive
+	cSearchExpression="Fox"
+	cExpressionSearched="The quick brown fox jumped over the lazy dog."
+	nOccurence=1
+	lCaseSensitive=.T.
+	cResult = _vfp.String.IndexOf(cSearchExpression, cExpressionSearched, nOccurrence, lCaseSensitive)
+	cExpected = 0
+	RETURN THIS.AssertEquals(cExpected, cResult, "Did not find [" +cSearchExpression + "] in [" + cExpressionSearched + "] (case sensitive)")
 
   ENDFUNC
 
-
-  FUNCTION testNewTest
-	* 1. Change the name of the test to reflect its purpose. Test one thing only.
-	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
-  RETURN This.AssertNotImplemented()
-
-  ENDFUNC
-
-
-  FUNCTION testNewTest
-	* 1. Change the name of the test to reflect its purpose. Test one thing only.
-	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
-  RETURN This.AssertNotImplemented()
+FUNCTION testStringLastIndexOf
+	LOCAL cSearchExpression, cExpressionSearched, nOccurrence, lCaseSensitive
+	cSearchExpression="o"
+	cExpressionSearched="The quick brown fox jumped over the lazy dog."
+	nOccurence=1
+	lCaseSensitive=.F.
+	cResult = _vfp.String.LastIndexOf(cSearchExpression, cExpressionSearched, nOccurrence, lCaseSensitive)
+	cExpected = 43
+	RETURN THIS.AssertEquals(cExpected, cResult, "Did not find [" +cSearchExpression + "] in [" + cExpressionSearched +"]")
 
   ENDFUNC
 
-
-  FUNCTION testNewTest
-	* 1. Change the name of the test to reflect its purpose. Test one thing only.
-	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
-  RETURN This.AssertNotImplemented()
-
-  ENDFUNC
-
-
-  FUNCTION testNewTest
-	* 1. Change the name of the test to reflect its purpose. Test one thing only.
-	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
-  RETURN This.AssertNotImplemented()
+FUNCTION testStringLastIndexOf_2ndOccurence
+	LOCAL cSearchExpression, cExpressionSearched, nOccurrence, lCaseSensitive
+	cSearchExpression="e"
+	cExpressionSearched="The quick brown fox jumped over the lazy dog."
+	nOccurrence=2
+	lCaseSensitive=.F.
+	cResult = _vfp.String.LastIndexOf(cSearchExpression, cExpressionSearched, nOccurrence, lCaseSensitive)
+	cExpected = 30
+	RETURN THIS.AssertEquals(cExpected, cResult, "Did not find [" +cSearchExpression + "] in [" + cExpressionSearched +"]")
 
   ENDFUNC
 
-
-  FUNCTION testNewTest
-	* 1. Change the name of the test to reflect its purpose. Test one thing only.
-	* 2. Implement the test by removing these comments and the default assertion and writing your own test code.
-  RETURN This.AssertNotImplemented()
+FUNCTION testStringLastIndexOf_0thOccurence
+	LOCAL cSearchExpression, cExpressionSearched, nOccurrence, lCaseSensitive
+	cSearchExpression="e"
+	cExpressionSearched="The quick brown fox jumped over the lazy dog."
+	nOccurrence=0
+	lCaseSensitive=.F.
+	cResult = _vfp.String.LastIndexOf(cSearchExpression, cExpressionSearched, nOccurrence, lCaseSensitive)
+	cExpected = 0
+	RETURN THIS.AssertEquals(cExpected, cResult, "Did not find [" +cSearchExpression + "] in [" + cExpressionSearched +"]")
 
   ENDFUNC
+
+FUNCTION testStringLastIndexOf_CaseSensitive
+	LOCAL cSearchExpression, cExpressionSearched, nOccurrence, lCaseSensitive
+	cSearchExpression="Fox"
+	cExpressionSearched="The quick brown fox jumped over the lazy dog."
+	nOccurence=1
+	lCaseSensitive=.T.
+	cResult = _vfp.String.IndexOf(cSearchExpression, cExpressionSearched, nOccurrence, lCaseSensitive, .t.)
+	cExpected = 0
+	RETURN THIS.AssertEquals(cExpected, cResult, "Did not find [" +cSearchExpression + "] in [" + cExpressionSearched + "] (case sensitive)")
+
+  ENDFUNC
+
 
 	**********************************************************************
 ENDDEFINE

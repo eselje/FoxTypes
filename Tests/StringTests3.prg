@@ -1,155 +1,136 @@
+
 **********************************************************************
-DEFINE CLASS StringTests3 as FxuTestCase OF FxuTestCase.prg
+DEFINE CLASS StringTests3 AS FxuTestCase OF FxuTestCase.prg
 **********************************************************************
-	#IF .f.
-	*
-	*  this LOCAL declaration enabled IntelliSense for
-	*  the THIS object anywhere in this class
-	*
-	LOCAL THIS AS StringTests3 OF StringTests3.PRG
+	#IF .F.
+*
+*  this LOCAL declaration enabled IntelliSense for
+*  the THIS object anywhere in this class
+*
+		LOCAL THIS AS StringTests3 OF StringTests3.prg
 	#ENDIF
-	
-	*  
-	*  declare properties here that are used by one or
-	*  more individual test methods of this class
-	*
-	*  for example, if you create an object to a custom
-	*  THIS.Property in THIS.Setup(), estabish the property
-	*  here, where it will be available (to IntelliSense)
-	*  throughout:
-	*
-*!*		ioObjectToBeTested = .NULL.
-*!*		icSetClassLib = SPACE(0)
+
+*  
+*  declare properties here that are used by one or
+*  more individual test methods of this class
+*
+*  for example, if you create an object to a custom
+*  THIS.Property in THIS.Setup(), estabish the property
+*  here, where it will be available (to IntelliSense)
+*  throughout:
+*
+	ioObjectToBeTested = .NULL.
+	icSetClassLib = SPACE(0)
 
 
-	* the icTestPrefix property in the base FxuTestCase class defaults
-	* to "TEST" (not case sensitive). There is a setting on the interface
-	* tab of the options form (accessible via right-clicking on the
-	* main FoxUnit form and choosing the options item) labeld as
-	* "Load and run only tests with the specified icTestPrefix value in test classes"
-	*
-	* If this is checked, then only tests in any test class that start with the
-	* prefix specified with the icTestPrefix property value will be loaded
-	* into FoxUnit and run. You can override this prefix on a per-class basis.
-	*
-	* This makes it possible to create ancillary methods in your test classes
-	* that can be shared amongst other test methods without being run as
-	* tests themselves. Additionally, this means you can quickly and easily 
-	* disable a test by modifying it and changing it's test prefix from
-	* that specified by the icTestPrefix property
-	
-	* Additionally, you could set this in the INIT() method of your derived class
-	* but make sure you dodefault() first. When the option to run only
-	* tests with the icTestPrefix specified is checked in the options form,
-	* the test classes are actually all instantiated individually to pull
-	* the icTestPrefix value.
+* the icTestPrefix property in the base FxuTestCase class defaults
+* to "TEST" (not case sensitive). There is a setting on the interface
+* tab of the options form (accessible via right-clicking on the
+* main FoxUnit form and choosing the options item) labeld as
+* "Load and run only tests with the specified icTestPrefix value in test classes"
+*
+* If this is checked, then only tests in any test class that start with the
+* prefix specified with the icTestPrefix property value will be loaded
+* into FoxUnit and run. You can override this prefix on a per-class basis.
+*
+* This makes it possible to create ancillary methods in your test classes
+* that can be shared amongst other test methods without being run as
+* tests themselves. Additionally, this means you can quickly and easily 
+* disable a test by modifying it and changing it's test prefix from
+* that specified by the icTestPrefix property
 
-*!*		icTestPrefix = "<Your preferred prefix here>"
-	
-	********************************************************************
-	FUNCTION Setup
-	********************************************************************
-	*
-	*  put common setup code here -- this method is called
-	*  whenever THIS.Run() (inherited method) to run each
-	*  of the custom test methods you add, specific test
-	*  methods that are not inherited from FoxUnit
-	*
-	*  do NOT call THIS.Assert..() methods here -- this is
-	*  NOT a test method
-	*
-    *  for example, you can instantiate all the object(s)
-    *  you will be testing by the custom test methods of 
-    *  this class:
-*!*		THIS.icSetClassLib = SET("CLASSLIB")
-*!*		SET CLASSLIB TO MyApplicationClassLib.VCX ADDITIVE
-*!*		THIS.ioObjectToBeTested = CREATEOBJECT("MyNewClassImWriting")
+* Additionally, you could set this in the INIT() method of your derived class
+* but make sure you dodefault() first. When the option to run only
+* tests with the icTestPrefix specified is checked in the options form,
+* the test classes are actually all instantiated individually to pull
+* the icTestPrefix value.
 
-	********************************************************************
+	icTestPrefix = "test"
+
+********************************************************************
+	FUNCTION SETUP
+********************************************************************
+*
+*  put common setup code here -- this method is called
+*  whenever THIS.Run() (inherited method) to run each
+*  of the custom test methods you add, specific test
+*  methods that are not inherited from FoxUnit
+*
+*  do NOT call THIS.Assert..() methods here -- this is
+*  NOT a test method
+*
+*  for example, you can instantiate all the object(s)
+*  you will be testing by the custom test methods of 
+*  this class:
+	THIS.icSetClassLib = SET("CLASSLIB")
+	SET PROCEDURE TO STRING.prg ADDITIVE
+	THIS.ioObjectToBeTested = CREATEOBJECT("String")
+	ADDPROPERTY(_VFP, "String", THIS.ioObjectToBeTested)
+
+********************************************************************
 	ENDFUNC
-	********************************************************************
-	
-	********************************************************************
+********************************************************************
+
+********************************************************************
 	FUNCTION TearDown
-	********************************************************************
-	*
-	*  put common cleanup code here -- this method is called
-	*  whenever THIS.Run() (inherited method) to run each
-	*  of the custom test methods you add, specific test
-	*  methods that are not inherited from FoxUnit
-	*
-	*  do NOT call THIS.Assert..() methods here -- this is
-	*  NOT a test method
-	*
-    *  for example, you can release  all the object(s)
-    *  you will be testing by the custom test methods of 
-    *  this class:
-*!*	    THIS.ioObjectToBeTested = .NULL.
-*!*		LOCAL lcSetClassLib
-*!*		lcSetClassLib = THIS.icSetClassLib
-*!*		SET CLASSLIB TO &lcSetClassLib        
+********************************************************************
+*
+*  put common cleanup code here -- this method is called
+*  whenever THIS.Run() (inherited method) to run each
+*  of the custom test methods you add, specific test
+*  methods that are not inherited from FoxUnit
+*
+*  do NOT call THIS.Assert..() methods here -- this is
+*  NOT a test method
+*
+*  for example, you can release  all the object(s)
+*  you will be testing by the custom test methods of 
+*  this class:
+	REMOVEPROPERTY(_VFP, "string")
+	THIS.ioObjectToBeTested = .NULL.
+	LOCAL lcSetClassLib
+	lcSetClassLib = THIS.icSetClassLib
+	SET CLASSLIB TO &lcSetClassLib
 
-	********************************************************************
+********************************************************************
 	ENDFUNC
-	********************************************************************	
-
-	*
-	*  test methods can use any method name not already used by
-	*  the parent FXUTestCase class
-	*    MODIFY COMMAND FXUTestCase
-	*  DO NOT override any test methods except for the abstract 
-	*  test methods Setup() and TearDown(), as described above
-	*
-	*  the three important inherited methods that you call
-	*  from your test methods are:
-	*    THIS.AssertTrue(<Expression>, "Failure message")
-	*    THIS.AssertEquals(<ExpectedValue>, <Expression>, "Failure message")
-	*    THIS.AssertNotNull(<Expression>, "Failure message")
-	*  all test methods either pass or fail -- the assertions
-	*  either succeed or fail
-    
-	*
-	*  here's a simple AssertNotNull example test method
-	*
-*!*		*********************************************************************
-*!*		FUNCTION TestObjectWasCreated
-*!*		*********************************************************************
-*!*		THIS.AssertNotNull(THIS.ioObjectToBeTested, ;
-*!*			"Object was not instantiated during Setup()")
-*!*		*********************************************************************
-*!*		ENDFUNC
-*!*		*********************************************************************
-
-	*
-	*  here's one for AssertTrue
-	*
-*!*		*********************************************************************
-*!*		FUNCTION TestObjectCustomMethod 
-*!*		*********************************************************************
-*!*		THIS.AssertTrue(THIS.ioObjectToBeTested.CustomMethod()), ;
-			"Object.CustomMethod() failed")
-*!*		*********************************************************************
-*!*		ENDFUNC
-*!*		*********************************************************************
-
-	*
-	*  and one for AssertEquals
-	*
-*!*		*********************************************************************
-*!*		FUNCTION TestObjectCustomMethod100ReturnValue 
-*!*		*********************************************************************
-*!*
-*!*		* Please note that string Comparisons with AssertEquals are
-*!*		* case sensitive. 
-*!*
-*!*		THIS.AssertEquals("John Smith", ;
-*!*			            THIS.ioObjectToBeTested.Object.CustomMethod100(), ;
-*!*			            "Object.CustomMethod100() did not return 'John Smith'",
-*!*		*********************************************************************
-*!*		ENDFUNC
-*!*		*********************************************************************
+********************************************************************	
 
 
-**********************************************************************
+	FUNCTION test_Replace
+	* Returns a new string in which all occurrences of a specified Unicode character in this instance are replaced with another specified Unicode character.
+	LOCAL cString, cFind, cReplace
+	cString = "We have nothing to fear but fear itself."
+	cFind = "fear"
+	cReplace = "hate"
+	cExpected = "We have nothing to hate but hate itself."
+	cActual = _VFP.String.Replace(cString, cFind, cReplace)
+	This.AssertEquals(cExpected, cActual, ".Replace() didn't get the results we expected.")
+	
+	
+	FUNCTION test_Extract
+	LOCAL cSearchExpression, cBeginDelim, cEndDelim, nOccurrence, nFlag
+	cSearchExpression = "<a href='test.html'>This is a test.</a>"
+	cBeginDelim = '>'
+	cEndDelim = '<'
+	nOccurrence = 1
+	nFlag = 0
+	
+	cResult = _VFP.STRING.Extract(cSearchExpression, cBeginDelim, cEndDelim, nOccurrence, nFlag)
+	
+	cExpected = "This is a test."
+	RETURN THIS.AssertEquals(cExpected, cResult, "This strings did not match")
+	ENDFUNC
+
+
+	FUNCTION test_Split
+	LOCAL cString 
+	LOCAL ARRAY aNames[3]
+	cString = "Rick, Tamar, Doug"
+	cExpected = "Tamar"
+	_VFP.String.Split(@aNames, cString,",")
+	cActual = aNames[2]
+	RETURN This.AssertEquals(cExpected, cActual, "Split did not return what we expected.")
+
+
 ENDDEFINE
-**********************************************************************
