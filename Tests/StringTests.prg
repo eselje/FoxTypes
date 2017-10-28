@@ -165,61 +165,6 @@ DEFINE CLASS StringTests AS FxuTestCase OF FxuTestCase.prg
 	ENDFUNC
 
 
-	FUNCTION TestShortDateFormat
-	&& 'd'	Short date 	10/12/2002
-	RETURN THIS.AssertNotImplemented()
-
-	FUNCTION TestLongDateFormat
-	&& 'D'	Long date 	December 10, 2002.  Can't use @YL
-	RETURN THIS.AssertNotImplemented()
-
-	FUNCTION TestFullDateAndTime
-	&& 'f'	Full date & time 	December 10, 2002 10:11 PM
-	RETURN THIS.AssertNotImplemented()
-
-	FUNCTION TestLongFullDateAndTime
-	&& 'F'	Full date & time (long) 	December 10, 2002 10:11:29 PM
-	RETURN THIS.AssertNotImplemented()
-
-	FUNCTION TestDefaultDateAndTime
-	&& 'g'	Default date & time 	10/12/2002 10:11 PM
-	RETURN THIS.AssertNotImplemented()
-
-	FUNCTION TestLongDefaultDateAndTime
-	&& 'G'	Default date & time (long) 	10/12/2002 10:11:29 PM
-	RETURN THIS.AssertNotImplemented()
-
-	FUNCTION TestMonthDay
-	&& 'M'	Month day pattern 	December 10
-	RETURN THIS.AssertNotImplemented()
-
-	FUNCTION TestRFC1123
-	&& 'r'	RFC1123 date string 	Tue, 10 Dec 2002 22:11:29 GMT
-	RETURN THIS.AssertNotImplemented()
-
-	FUNCTION TestSortableDateString
-	&& 's'	Sortable date string 	2002-12-10T22:11:29
-	RETURN THIS.AssertNotImplemented()
-
-	FUNCTION TestShortTime
-	&& 't'	Short time 	10:11 PM
-	RETURN THIS.AssertNotImplemented()
-
-	FUNCTION TestLongTime
-	&& 'T'	Long time 	10:11:29 PM
-	RETURN THIS.AssertNotImplemented()
-
-	FUNCTION TestUniversalSortableLocalTime
-	&& 'u'	Universal sortable, local time 	2002-12-10 22:13:50Z
-	RETURN THIS.AssertNotImplemented()
-
-	FUNCTION TestUniversaleSortableGMT
-	&& 'U'	Universal sortable, GMT 	December 11, 2002 3:13:50 AM
-	RETURN THIS.AssertNotImplemented()
-
-	FUNCTION TestYearMonth
-	&& 'Y'	&& 	Year month pattern 	December, 2002
-	RETURN THIS.AssertNotImplemented()
 
 	FUNCTION TestDecimal
 	&& 'D'

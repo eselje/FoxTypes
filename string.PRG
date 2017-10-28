@@ -39,6 +39,10 @@ ENDDEFINE
 
 DEFINE CLASS String AS Variable
 
+	cShortDatePattern	= 'MM/dd/yyyy'
+	cShortTimePattern	= "hh:mm tt"
+	cLongTimePattern	= "hh:mm:ss tt"
+	
 	************************************************************
 	FUNCTION Format
 	************************************************************
@@ -95,22 +99,22 @@ DEFINE CLASS String AS Variable
 				    BitLShift(ASC(SUBSTR(cTimeZone, 2,1)),  8) +;
 				    BitLShift(ASC(SUBSTR(cTimeZone, 3,1)), 16) +;
 				    BitLShift(ASC(SUBSTR(cTimeZone, 4,1)), 24))
-				dtConvert = dtConvert - iBiasSeconds
+				dtConvert = dtConvert + iBiasSeconds
 				dConvert = TTOD(dtConvert)						    
 			ENDIF 
 			DO CASE
 			CASE cFormat='d'	&& Short date 	10/12/2002
 				cResult=TRANSFORM(dConvert, "@YS")
-			CASE cFormat='D'	&& 	Long date 	December 10, 2002.  Can't use @YL
-				cFormat='MMM dd, yyyy'
+			CASE cFormat='D'	&& 	Long date 	Saturday, October 28, 2017.  Can't use @YL
+				cFormat='D, MMMM dd, yyyy'
 			CASE cFormat='f'	&& 	Full date & time 	December 10, 2002 10:11 PM
 				cFormat='MMMM dd, yyyy hh:mm tt'
 			CASE cFormat='F'	&& 	Full date & time (long) 	December 10, 2002 10:11:29 PM
 				cFormat='MMMM dd, yyyy hh:mm:ss tt'
-			CASE cFormat='g'	&& 	Default date & time 	10/12/2002 10:11 PM
-				cFormat='dd/MM/yyyy hh:mm tt'
-			CASE cFormat='G'	&& 	Default date & time (long) 	10/12/2002 10:11:29 PM
-				cFormat='dd/MM/yyyy hh:mm tt'
+			CASE cFormat='g'	&& 	Global Default date & time 	10/12/2002 10:11 PM
+				cFormat= This.cShortDatePattern+' '+This.cShortTimePattern
+			CASE cFormat='G'	&& 	Global Default date & time (long) 	10/12/2002 10:11:29 PM
+				cFormat= This.cShortDatePattern +' '+This.cLongTimePattern
 			CASE cFormat='M'	&& 	Month day pattern 	December 10
 				cFormat='MMMM dd'
 			CASE cFormat='r'	&& 	RFC1123 date string 	Tue, 10 Dec 2002 22:11:29 GMT
@@ -118,15 +122,17 @@ DEFINE CLASS String AS Variable
 			CASE cFormat='s'	&& 	Sortable date string 	2002-12-10T22:11:29
 				cResult = TTOC(dtConvert,3)
 			CASE cFormat='t'	&& 	Short time 	10:11 PM
-				cFormat='hh:mm tt'
+				cFormat=This.cShortTimePattern
 			CASE cFormat='T'	&& 	Long time 	10:11:29 PM
-				cFormat='hh:mm:ss tt'
+				cFormat= This.cLongTimePattern
 			CASE cFormat='u'	&& 	Universal sortable, local time 	2002-12-10 22:13:50Z
-				cFormat='yyyy-MM-dd hh:mm:ddZ'
+				cFormat='yyyy-MM-dd hh:mm:ssZ'
 			CASE cFormat='U'	&& 	Universal sortable, GMT 	December 11, 2002 3:13:50 AM
-				cFormat="MMMM dd, yyyy hh:mm:ss tt"
+				cFormat="D, MMMM dd, yyyy hh:mm:ss tt"
 			CASE cFormat='Y'	&& 	Year month pattern 	December, 2002
 				cFormat="MMMM, yyyy"
+			CASE cFormat='y'	&& 	Year month pattern 	December 2002
+				cFormat="MMMM yyyy"
 			ENDCASE
 		ENDIF
 		IF EMPTY(cResult) AND LEN(cFormat)>1
@@ -148,6 +154,7 @@ DEFINE CLASS String AS Variable
 		cFormat=STRTRAN(cFormat,"yyyy", TRANSFORM(YEAR(dtVar)))
 		cFormat=STRTRAN(cFormat,"yy", RIGHT(TRANSFORM(YEAR(dtVar)),2))
 		cFormat=STRTRAN(cFormat,"tt", IIF(HOUR(dtVar)<12,"AM","PM"))
+		cFormat=STRTRAN(cFormat,"D", CDOW(dtVar))
 		RETURN cFormat
 
 	PROTECTED FUNCTION NumericFormat
