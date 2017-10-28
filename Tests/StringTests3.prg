@@ -163,18 +163,75 @@ DEFINE CLASS StringTests3 AS FxuTestCase OF FxuTestCase.prg
 
 
   FUNCTION testCompare
-  RETURN This.AssertNotImplemented()
+	LOCAL cString, cString2
+	cString = "Visual FoxPro 9"
+	cString2 = "Visual FoxPro 9.1"
+	iResult = _VFP.String.Compare(cString, cString2)
+	RETURN This.AssertEquals(-1, iResult, cString + " is showing as greater than " + cString2)
 
+  ENDFUNC
+
+  FUNCTION testCompareEquals_CaseInsensitive
+	LOCAL cString, cString2
+	cString = "ABCDEFG"
+	cString2 = "abcdefg"
+	iResult = _VFP.String.Compare(cString, cString2, StringCompareOptions_CaseInsensitive)
+	RETURN This.AssertEquals(0, iResult, cString + " is showing as greater than " + cString2)
+
+  ENDFUNC
+
+  FUNCTION testCompareEquals_CaseSensitive
+	LOCAL cString, cString2
+	cString = "ABCDEFG"
+	cString2 = "abcdefg"
+	iResult = _VFP.String.Compare(cString, cString2)
+	RETURN This.AssertEquals(-1, iResult, cString + " is showing as greater than " + cString2)
+
+  ENDFUNC
+
+  FUNCTION testCompareBackwards
+	LOCAL cString, cString2
+	cString = "Visual FoxPro 9.1"
+	cString2 = "Visual FoxPro 9"
+	iResult = _VFP.String.Compare(cString, cString2)
+	RETURN This.AssertEquals(1, iResult, cString + " is showing as less than " + cString2)
   ENDFUNC
 
   FUNCTION testCompare_Exact
-  RETURN This.AssertNotImplemented()
+	LOCAL cString, cString2
+	cString = "Visual FoxPro 9"
+	cString2 = "Visual FoxPro 9.1"
+	iResult = _VFP.String.Compare(cString, cString2, StringCompareOptions_Exact)
+	RETURN This.AssertEquals(-1, iResult, cString + " is showing as greater than " + cString2)
+  ENDFUNC
+
+  FUNCTION testCompareBackwards_Exact
+	LOCAL cString, cString2
+	cString = "Visual FoxPro 9.1"
+	cString2 = "Visual FoxPro 9"
+	iResult = _VFP.String.Compare(cString, cString2, StringCompareOptions_Exact)
+	RETURN This.AssertEquals(1, iResult, cString + " is showing as less than " + cString2)
+  ENDFUNC
+
+  FUNCTION testIsNullOrEmpty
+	LOCAL cString 
+	cString = "Not an empty string."
+	lResult = _VFP.String.IsNullOrEmpty(cString)
+	RETURN This.AssertFalse(lResult, "Non-Empty String is showing as empty or null.")
+
+  FUNCTION testIsNullOrEmpty_onNull
+	LOCAL cString 
+	cString = .null.
+	lResult = _VFP.String.IsNullOrEmpty(cString)
+	RETURN This.AssertTrue(lResult, "Null String is not showing as empty or null.")
+
+  FUNCTION testIsNullOrEmpty_onEmpty
+	LOCAL cString 
+	cString = ""
+	lResult = _VFP.String.IsNullOrEmpty(cString)
+	RETURN This.AssertTrue(lResult, "Empty String is not showing as empty or null.")
 
   ENDFUNC
 
-  FUNCTION testCompare_CaseSensitive
-  RETURN This.AssertNotImplemented()
-
-  ENDFUNC
 
 ENDDEFINE

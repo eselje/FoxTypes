@@ -25,11 +25,11 @@ DEFINE CLASS Variable AS Custom
 	RETURN cString
 		
 	
-	FUNCTION EmptyOrNull
+	FUNCTION IsNullOrEmpty
 	LPARAMETERS xValue
 	LOCAL lReturn
-	lReturn = ! ISNULL(xValue)
-	IF lReturn
+	lReturn = ISNULL(xValue)
+	IF ! lReturn
 		xValue = This.toString(xValue)
 		lReturn = EMPTY(xValue)
 	ENDIF
@@ -387,7 +387,7 @@ DEFINE CLASS String AS Variable
 	LOCAL lCaseInsensitive, lExact, lReturn
 	cSubString=EVL(cSubString,"")
 	nFlags = EVL(nFlags,0)
-	lReturn = ! This.EmptyOrNull(cString)
+	lReturn = ! This.IsNullOrEmpty(cString)
 	IF lReturn
 		This.getComparisonFlags(nFlags, @lCaseInsensitive, @lExact)
 		IF lExact
@@ -397,7 +397,38 @@ DEFINE CLASS String AS Variable
 		ENDIF
 	ENDIF
 	RETURN lReturn
-			
+		
+	
+	FUNCTION Compare
+	LPARAMETERS cString1, cString2, nFlags
+	* Return -1 if cString1 < cString2
+	* Return 0 if they're the same
+	* Return 1 if cString2 > cString1	
+	LOCAL lCaseInsensitive, lExact, lReturn
+	nFlags = EVL(nFlags,0)
+	This.getComparisonFlags(nFlags, @lCaseInsensitive, @lExact)
+	cSetExact=SET("Exact")
+	IF lExact
+		SET EXACT ON 
+	ELSE
+		IF LEN(cString2) < LEN(cString1)
+			cString2 =This.PadLeft(cString2, LEN(cString1))
+		ELSE
+			IF LEN(cString2) > LEN(cString1)
+				cString1 = This.PadLeft(cString1, LEN(cString2))
+			ENDIF 
+		ENDIF 
+	ENDIF
+	IF lCaseInsensitive
+		cString1 = This.ToLower(cString1)
+		cString2 = This.ToLower(cString2)
+	ENDIF
+	lReturn = ICASE(cString1=cString2,0,cString1<cString2,-1,1)
+	SET EXACT &cSetExact 
+	RETURN lReturn
+		
+	
+	
 	
 	PROTECTED FUNCTION getComparisonFlags
 	LPARAMETERS nFlags, lCaseSensitive, lExact
