@@ -1,12 +1,5 @@
-#DEFINE StringSplitOptions_IncludeLastElement 2
-#DEFINE StringSplitOptions_RemoveEmptyOptions 4
-#DEFINE StringSplitOptions_CaseInsensitive	8
-#DEFINE StringSplitOptions_IncludeParseChar 16
 
-#DEFINE StringCompareOptions_CaseInsensitive	1
-#DEFINE StringCompareOptions_Exact				2
-
-DEFINE CLASS Variable AS Custom 
+DEFINE CLASS StaticVariable AS Custom 
 
 	FUNCTION toString
 	LPARAMETERS xValue
@@ -37,11 +30,28 @@ DEFINE CLASS Variable AS Custom
 ENDDEFINE
 
 
-DEFINE CLASS String AS Variable
+DEFINE CLASS String AS StaticVariable 
+
+	#DEFINE StringSplitOptions_IncludeLastElement 2
+	#DEFINE StringSplitOptions_RemoveEmptyOptions 4
+	#DEFINE StringSplitOptions_CaseInsensitive	8
+	#DEFINE StringSplitOptions_IncludeParseChar 16
+
+	#DEFINE StringCompareOptions_CaseInsensitive	1
+	#DEFINE StringCompareOptions_Exact				2
 
 	cShortDatePattern	= 'MM/dd/yyyy'
 	cShortTimePattern	= "hh:mm tt"
 	cLongTimePattern	= "hh:mm:ss tt"
+	cCurrencySymbol		= SET("currency", 1)
+	cNumberSeperator  = SET("separator")
+	cDecimalPoint		= SET("point")
+
+	PROTECTED FUNCTION getComparisonFlags
+	LPARAMETERS nFlags, lCaseSensitive, lExact
+	lCaseSensitive = BITTEST(nFlags,0)
+	lExact		   = BITTEST(nFlags,1)
+	
 	
 	************************************************************
 	FUNCTION Format
@@ -159,34 +169,47 @@ DEFINE CLASS String AS Variable
 
 	PROTECTED FUNCTION NumericFormat
 		LPARAMETERS nConvert, cFormatCode
-		LOCAL cResult, cFormat
+		LOCAL cResult, cFormat, iPrecision, cWidth, cPattern, iDecimals
+		LOCAL cSeparator, cPoint, cSymbol
 		cResult = ""   
 		cFormat = UPPER(LEFT(cFormatCode,1))                           
-		iWidth = VAL(SUBSTR(cFormatCode,2))
+		cWidth  = SUBSTR(cFormatCode,2)
+		iPrecision = IIF(EMPTY(cWidth) and cFormatCode='C', 2, VAL(cWidth))
+		iDecimals = SET("Decimals")
+		SET DECIMALS TO iPrecision	
+		cSeparator= SET("SEPARATOR")
+		cPoint = SET("POINT")
+		cSymbol = SET("CURRENCY",1)
+		SET CURRENCY TO (This.cCurrencySymbol)
+		SET POINT TO (This.cDecimalPoint)
+		SET SEPARATOR TO (This.cNumberSeperator)
 		DO CASE
-			CASE cFormat='D'	AND nConvert=INT(nConvert) 	&& Decimal	
+			CASE cFormat='D' AND nConvert=INT(nConvert) 	&& Decimal	
 				cResult=TRANSFORM(nConvert)
-			CASE cFormat='E'	&& Exponential
-				cResult=TRANSFORM(nConvert, "@^")
-			CASE INLIST(cFormat,'C','F','P')	&& Fixed # of decimal place (default 0)
-				IF cFormat='P'
-					nConvert = nConvert * 100
-				ENDIF 
-				cResult=ALLTRIM(TRANSFORM(nConvert, REPLICATE('9',12)+IIF(iWidth<=0,'','.'+REPLICATE('9',iWidth))))
-				IF cFormat='C'
-					cResult = '$'+cResult
-				ELSE
-					IF cFormat='P'
-						cResult = cResult + '%'
-					ENDIF 
+				IF NOT EMPTY(cWidth) AND VAL(cWidth) > LEN(cResult)
+					cResult = This.PadLeft(cResult, VAL(cWidth), '0')
 				ENDIF
 				
+			CASE cFormat='E'	&& Exponential
+				cPattern = "@^"
+				cResult=TRANSFORM(nConvert, cPattern)
+				
+			CASE cFormat = 'C'	&& Currency
+				
+				cPattern = "@$ 999,999,999,999"+IIF(iPrecision <=0,'','.'+REPLICATE('9',iPrecision))
+				cResult = ALLTRIM(TRANSFORM(nConvert, cPattern))
+			
+			CASE INLIST(cFormat,'F','P','N')	&& Fixed # of decimal place (default 0)
+				cPattern =  "999,999,999,999"+IIF(iPrecision <=0,'','.'+REPLICATE('9',iPrecision))
+				IF cFormat='P'
+					nConvert = nConvert * 100
+					cPattern = cPattern + '%'
+				ENDIF 
+				cResult = ALLTRIM(TRANSFORM(nConvert, cPattern))
 			CASE cFormat='G' && General
 				cResult=TRANSFORM(nConvert)
-			CASE cFormat='N' && Numeric
-				cResult=TRANSFORM(nConvert)
 			CASE cFormat='P' && Percent
-				iWidth = IIF(LEN(cFormat)=1,2,iWidth)	&& Default to 2 decimal places
+				iPrecision = IIF(LEN(cFormat)=1,2,iPrecision )	&& Default to 2 decimal places
 				cResult= TRANSFORM(nConvert*100) +'%'
 			CASE cFormat='R'	&& Round
 				cResult=TRANSFORM(nConvert)
@@ -197,7 +220,11 @@ DEFINE CLASS String AS Variable
 			CASE cFormat = 'W' 	&& Words
 				cResult = This.NumberToWords(nConvert)
 		ENDCASE
-		
+		SET DECIMALS TO (iDecimals) 
+		SET CURRENCY TO (cSymbol)
+		SET POINT TO (cPoint)
+		SET SEPARATOR TO (cSeparator)
+
 		RETURN cResult
 
 	FUNCTION NumberToWords
@@ -434,14 +461,18 @@ DEFINE CLASS String AS Variable
 	SET EXACT &cSetExact 
 	RETURN lReturn
 		
+	FUNCTION Occurs
+	* How often does a substring occur
+	LPARAMETERS cSubString, cString, nFlags
+	nFlags = EVL(nFlags,0)
+	IF This.IsNullOrEmpty(cSubString) OR This.IsNullOrEmpty(cString)
+		iReturn = 0
+	ELSE 
+		iReturn = OCCURS(cSubString, cString)
+	ENDIF 
+	RETURN iReturn
 	
 	
-	
-	PROTECTED FUNCTION getComparisonFlags
-	LPARAMETERS nFlags, lCaseSensitive, lExact
-	lCaseSensitive = BITTEST(nFlags,0)
-	lExact		   = BITTEST(nFlags,1)
-	
-	
+
 
 ENDDEFINE

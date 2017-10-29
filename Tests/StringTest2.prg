@@ -168,12 +168,6 @@ DEFINE CLASS StringTest2 as FxuTestCase OF FxuTestCase.prg
  
 
 
-  FUNCTION testCustomDateFormat
-	cResult = _vfp.String.FORMAT("It is currently {0:MMM dd, yy hh:mm:ss tt}.", DATETIME(2016,9,23,16,36,12))
-	cExpected = "It is currently Sep 23, 16 16:36:12 PM."
-  RETURN This.AssertEquals(cExpected, cResult, "This strings did not match")
-  
-  ENDFUNC
 
 
   FUNCTION test0toWord

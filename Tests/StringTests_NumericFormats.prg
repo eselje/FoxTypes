@@ -1,5 +1,5 @@
 **********************************************************************
-DEFINE CLASS StringDateTimeTests AS FxuTestCase OF FxuTestCase.prg
+DEFINE CLASS StringTests_NumericFormats AS FxuTestCase OF FxuTestCase.prg
 **********************************************************************
 
 	#IF .F.
@@ -7,7 +7,7 @@ DEFINE CLASS StringDateTimeTests AS FxuTestCase OF FxuTestCase.prg
 		*  this LOCAL declaration enabled IntelliSense for
 		*  the THIS object anywhere in this class
 		*
-		LOCAL THIS AS StringDateTimeTests OF StringDateTimeTests.PRG
+		LOCAL THIS AS StringTests_NumericFormats OF StringTests_NumericFormats.prg
 	#ENDIF
 
 	*
@@ -126,104 +126,139 @@ DEFINE CLASS StringDateTimeTests AS FxuTestCase OF FxuTestCase.prg
 	*********************************************************************
 
 
-	FUNCTION TestShortDateFormat
-	&& 'd'	Short date 	10/12/2002
-	cResult = _vfp.String.FORMAT("January 1, 2017, is {0:d}.", {^2017/1/1})
-	cExpected = "January 1, 2017, is 01/01/2017."
-	RETURN THIS.AssertEquals(cExpected, cResult, "The datetimes do not match")
+	FUNCTION TestDecimal
+	&& 'D'
+	LOCAL nValue 
+	nValue = 1234
+	cExpected = "1234"
+	cActual = _VFP.String.Format("{0:D}", nValue)	
+	RETURN THIS.AssertEquals(cExpected, cActual, "The currency value do not match")
 
-	FUNCTION TestLongDateFormat
-	&& 'D'	Long date 	Monday, December 10, 2002.  Can't use @YL
-	cResult = _vfp.String.FORMAT("January 1, 2017, is {0:D}.", {^2017/1/1})
-	cExpected = "January 1, 2017, is Sunday, January 01, 2017."
-	RETURN THIS.AssertEquals(cExpected, cResult, "The datetimes do not match")
+	FUNCTION TestDecimalWithWidth
+	&& 'D'
+	LOCAL nValue 
+	nValue = 1234
+	cExpected = "000001234"
+	cActual = _VFP.String.Format("{0:D9}", nValue)	
+	RETURN THIS.AssertEquals(cExpected, cActual, "The currency value do not match")
 
-	FUNCTION TestFullDateAndTime
-	&& 'f'	Full date & time 	December 10, 2002 10:11 PM
-	cResult = _vfp.String.FORMAT("{0:f}.", DATETIME(2017,1,1,5,30,25))
-	cExpected = "January 01, 2017 05:30 AM."
-	RETURN THIS.AssertEquals(cExpected, cResult, "The datetimes do not match")
+	FUNCTION TestExponential
+	&& 'E'	&& Exponential, by default 
+	LOCAL nValue, cExpected, cValue 
+	nValue = 12345.6789
+	cExpected = "1.234568E+004"
+	cActual = _VFP.String.Format("{0:E}", nValue)	
+	RETURN THIS.AssertEquals(cExpected, cActual, "The exponential values do not match")
 
-	FUNCTION TestLongFullDateAndTime
-	&& 'F'	Full date & time (long) 	December 10, 2002 10:11:29 PM
-	cResult = _vfp.String.FORMAT("{0:F}.", DATETIME(2017,1,1,5,30,25))
-	cExpected = "January 01, 2017 05:30:25 AM."
-	RETURN THIS.AssertEquals(cExpected, cResult, "The datetimes do not match")
+	FUNCTION TestExponential_Small
+	&& 'E'	&& Exponential, by default 
+	LOCAL nValue, cExpected, cValue 
+	nValue = .123456789
+	cExpected = "1.234568E-001"
+	cActual = _VFP.String.Format("{0:E}", nValue)	
+	RETURN THIS.AssertEquals(cExpected, cActual, "The exponential values do not match")
 
-	FUNCTION TestDefaultDateAndTime
-	&& 'g'	Default date & time (day, month, year) 	10/12/2002 10:11 PM
-	cResult = _vfp.String.FORMAT("{0:g}.", DATETIME(2017,10,12,5,30,25))
-	cExpected = "10/12/2017 05:30 AM."
-	RETURN THIS.AssertEquals(cExpected, cResult, "The datetimes do not match")
+	FUNCTION TestExponential_Negative
+	&& 'E'	&& Exponential, by default 
+	LOCAL nValue, cExpected, cValue 
+	nValue = -12345.6789
+	cExpected = "-1.234568E+004"
+	cActual = _VFP.String.Format("{0:E}", nValue)	
+	RETURN THIS.AssertEquals(cExpected, cActual, "The exponential values do not match")
 
-	FUNCTION TestLongDefaultDateAndTime
-	&& 'G'	Default date & time (long) 	10/12/2002 10:11:29 PM
-	cResult = _vfp.String.FORMAT("{0:G}.", DATETIME(2017,10,12,5,30,25))
-	cExpected = "10/12/2017 05:30:25 AM."
-	RETURN THIS.AssertEquals(cExpected, cResult, "The datetimes do not match")
+	FUNCTION TestExponential_10
+*!*	Console.WriteLine(value.ToString("E10", CultureInfo.InvariantCulture));
+*!*	// Displays 1.2345678900E+004
+	nValue = .123456789
+	cExpected = "1.234568E-001"
+	cActual = _VFP.String.Format("{0:E}", nValue)	
+	RETURN THIS.AssertEquals(cExpected, cActual, "The exponential values do not match")
 
-	FUNCTION TestMonthDay
-	&& 'M'	Month day pattern 	December 10
-	cResult = _vfp.String.FORMAT("{0:M}", DATETIME(2017,10,12,5,30,25))
-	cExpected = "October 12"
-	RETURN THIS.AssertEquals(cExpected, cResult, "The datetimes do not match")
+	FUNCTION TestExponential_e4
+*!*	Console.WriteLine(value.ToString("e4", CultureInfo.InvariantCulture));
+*!*	// Displays 1.2346e+004
+	nValue = .123456789
+	cExpected = "1.234568E-001"
+	cActual = _VFP.String.Format("{0:E}", nValue)	
+	RETURN THIS.AssertEquals(cExpected, cActual, "The exponential values do not match")
 
-	FUNCTION TestRFC1123
-	&& 'r'	RFC1123 date string 	Tue, 10 Dec 2002 22:11:29 GMT
-	cResult = _vfp.String.FORMAT("{0:r}", DATETIME(2017,10,28,17,30,25))
-	cExpected = "Sat, 28 Oct 2017 23:30:25 GMT"
-	RETURN THIS.AssertEquals(cExpected, cResult, "The datetimes do not match")
+	FUNCTION TestNumeric_Cultural
+*!*	Console.WriteLine(value.ToString("E", 
+*!*	                  CultureInfo.CreateSpecificCulture("fr-FR")));
+*!*	// Displays 1,234568E+004	nValue = .123456789
+	nValue = 123123.456
+	_VFP.String.cNumberSeperator='.'
+	_VFP.String.cDecimalPoint=','
+	cActual = _VFP.String.Format("{0:N3}", nValue)	
+	cExpected = "123.123,456"
+	RETURN THIS.AssertEquals(cExpected, cActual, "The numerica value with cultural differences do not match")
 
-	FUNCTION TestSortableDateString
-	&& 's'	Sortable date string 	2002-12-10T22:11:29
-	cResult = _vfp.String.FORMAT("{0:s}", DATETIME(2017,10,28,17,30,25))
-	cExpected = "2017-10-28T17:30:25"
-	RETURN THIS.AssertEquals(cExpected, cResult, "The datetimes do not match")
+	FUNCTION TestCurrency
+	&& 'C'	&& Currency
+	LOCAL nValue 
+	nValue = 1234.5678
+	cExpected = "$1,234.57"
+	cActual = _VFP.String.Format("{0:C}", nValue)	
+	RETURN THIS.AssertEquals(cExpected, cActual, "The currency value do not match")
 
-	FUNCTION TestShortTime
-	&& 't'	Short time 	10:11 PM
-	cResult = _vfp.String.FORMAT("{0:t}", DATETIME(2017,10,28,17,30,25))
-	cExpected = "17:30 PM"
-	RETURN THIS.AssertEquals(cExpected, cResult, "The datetimes do not match")
-
-	FUNCTION TestLongTime
-	&& 'T'	Long time 	10:11:29 PM
-	cResult = _vfp.String.FORMAT("{0:T}", DATETIME(2017,10,28,17,30,25))
-	cExpected = "17:30:25 PM"
-	RETURN THIS.AssertEquals(cExpected, cResult, "The datetimes do not match")
-
-	FUNCTION TestUniversalSortableUTC
-	&& 'u'	Universal sortable, UTC 	2002-12-10 22:13:50Z
-	cResult = _vfp.String.FORMAT("{0:u}", DATETIME(2017,10,28,17,30,10))
-	cExpected = "2017-10-28 23:30:10Z"
-	RETURN THIS.AssertEquals(cExpected, cResult, "The datetimes do not match")
-
-	FUNCTION TestUniversalFullFormat
-	&& 'U'	Universal full format 	December 11, 2002 3:13:50 AM
-	cResult = _vfp.String.FORMAT("{0:U}", DATETIME(2017,10,28,17,30,10))
-	cExpected = "Saturday, October 28, 2017 23:30:10 PM"
-	RETURN THIS.AssertEquals(cExpected, cResult, "The datetimes do not match")
-
-	FUNCTION TestYearMonth
-	&& 'Y'	&& 	Year month pattern 	December, 2002
-	cResult = _vfp.String.FORMAT("{0:Y}", DATETIME(2017,10,28,17,30,10))
-	cExpected = "October, 2017"
-	RETURN THIS.AssertEquals(cExpected, cResult, "The datetimes do not match")
-
-	FUNCTION TestYearMonthNoComma
-	&& 'y'	&& 	Year month pattern 	December 2002
-	cResult = _vfp.String.FORMAT("{0:y}", DATETIME(2017,10,28,17,30,10))
-	cExpected = "October 2017"
-	RETURN THIS.AssertEquals(cExpected, cResult, "The datetimes do not match")
+	FUNCTION TestCurrency3DigitsOfPrecision
+	&& 'C'	&& Currency
+	LOCAL nValue 
+	nValue = 1234.56789
+	cExpected = "$1,234.568"
+	cActual = _VFP.String.Format("{0:C3}", nValue)	
+	RETURN THIS.AssertEquals(cExpected, cActual, "The currency value do not match")
 
 
-  FUNCTION testCustomDateFormat
-	cResult = _vfp.String.FORMAT("It is currently {0:MMM dd, yy hh:mm:ss tt}.", DATETIME(2016,9,23,16,36,12))
-	cExpected = "It is currently Sep 23, 16 16:36:12 PM."
-  RETURN This.AssertEquals(cExpected, cResult, "This strings did not match")
-  
+	FUNCTION TestCurrencyNoDecimals
+	&& 'C'	&& Currency
+	LOCAL nValue 
+	nValue = 1234.56789
+	cExpected = "$1,235"
+	cActual = _VFP.String.Format("{0:C0}", nValue)	
+	RETURN THIS.AssertEquals(cExpected, cActual, "The currency value do not match")
 
-  ENDFUNC
+	FUNCTION TestPercentage
+	&& 'P'	&& Pctg
+	LOCAL nValue 
+	nValue = .3456
+	cExpected = "34.56%"
+	cActual = _VFP.String.Format("{0:P2}", nValue)	
+	RETURN THIS.AssertEquals(cExpected, cActual, "The pctg value do not match")
+
+	FUNCTION TestFixedDecimals
+	&& 'F'
+	LOCAL nValue 
+	nValue = 123.3456
+	cExpected = "123.346"
+	cActual = _VFP.String.Format("{0:F3}", nValue)	
+	RETURN THIS.AssertEquals(cExpected, cActual, "The Fixed Decimals value do not match")
+
+	FUNCTION TestGeneral
+	&& 'G'
+	LOCAL nValue 
+	nValue = 123.3456
+	cExpected = "123.3456"
+	cActual = _VFP.String.Format("{0:G}", nValue)	
+	RETURN THIS.AssertEquals(cExpected, cActual, "The General value do not match")
+
+	FUNCTION TestNumeric
+	&& 'N'
+	LOCAL nValue 
+	nValue = 123.3456
+	cExpected = "123.3"
+	cActual = _VFP.String.Format("{0:N1}", nValue)	
+	RETURN THIS.AssertEquals(cExpected, cActual, "The Numeric value do not match")
+
+
+	FUNCTION TestHex
+	&& 'X' Hex 
+	LOCAL nValue 
+	nValue = 64
+	cExpected = "0x00000040"
+	cActual = _VFP.String.Format("{0:X}", nValue)	
+	RETURN THIS.AssertEquals(cExpected, cActual, "The Numeric value do not match")
+
 
 	**********************************************************************
 ENDDEFINE
