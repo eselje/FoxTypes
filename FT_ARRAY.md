@@ -1,3 +1,30 @@
 ﻿# ARRAY (coming soon)
 
-Replicates the functionality of C#'s ARRAY Static Class
+Replicates the functionality of C#'s ARRAY Static Class (w/ some Javascript functionality as well)
+
+## Potential Functions
+
+* Clone()
+* Clear()
+* Concat()
+* Copy()
+* Equals()
+* Every()
+* Fill()
+* Filter()
+* Find()
+* FindIndex()
+* FindLastIndexOf()
+* ForEach()
+* IndexOf()
+* Join()
+* Length()
+* Map()
+* Pop() / Push()
+* Resize()
+* Reverse()
+* Shift() / Unshift()
+* Slice()
+* Some()
+* Sort()
+* ToString()

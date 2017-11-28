@@ -17,9 +17,9 @@ ADDPROPERTY(_vfp, "STRING", CREATEOBJECT("String"))
 ```
 
 ## The FoxTypes
-* [STRING](FT_STRING.MD)
-* [DATETIME](FT_DATETIME.MD)
-* [ARRAY](FT_ARRAY.MD) (Coming soon!)
+* [STRING](FT_STRING.md)
+* [DATETIME](FT_DATETIME.md)
+* [ARRAY](FT_ARRAY.md) 
 
 ### Tests
 
