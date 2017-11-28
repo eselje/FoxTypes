@@ -1,151 +1,26 @@
 # FoxTypes
-Recreating C# static types in Visual FoxPro Code classes
+Recreating C# static types (String, DateTime, Array) in Visual FoxPro Code classes
 
-# Usage
-Create a static object in the _VFP object called String, which will then be available to format and manipulate strings anywhere in your app with a consistent syntax
+### Why?
+Visual FoxPro originated from dBase, and retained it's procedural roots for backward compatibility even while the rest of the world moved to object-oriented syntax. This project aims to collect the myriad procedural functional under static classes. This will give us:
+* Consistency (because all commands start with the type, e.g. STRING.IndexOf() rather than AT() )
+* Intellisense (because who can remember the name of that function that joins elements of an array into a string)
+* Compatibility (lowering the learning curve for other languages)
 
+### Usage
+Simply instantiate the class once and you're ready to use it. For maximum efficiency, add the instance into the _VFP object, which will make it available anywhere in your app and don't have to worry about it going away with any CLEAR statement.
 
 ```foxpro
 SET PROCEDURE TO STRING.prg ADDITIVE
 ADDPROPERTY(_vfp, "STRING", CREATEOBJECT("String"))
 ```
 
-Once the static variable is part of the _VFP object, you can call it anytime and don't have to worry about it going away with any CLEAR statement
+## The FoxTypes
+* [STRING](FT_STRING.MD)
+* [DATETIME](FT_DATETIME.MD)
+* [ARRAY](FT_ARRAY.MD) (Coming soon!)
 
-#### Format
-
-Format is the most powerful function. It accepts multiple zero-based parameters.
-```foxpro
-? _VFP.String.Format(_vfp.String.FORMAT("The {0} in {1} falls {2} on the {3}.", "rain", "Spain", "mainly", "plain")
-```
-
-	
-> The rain in Spain falls mainly on the plain.
-> 
-	
-Parameters can be of any type, reused, and also formatted using dozens of formatting templates.
-
-```foxpro
-? _vfp.String.Format("Today's date is {0:d} and the time is {0:t}")
-```
-
-> Today's date is 09/14/2017 and the time is 16:43:13 PM
-> 
-
-Newlines can be added with \n
-
-```foxpro
-? _vfp.String.FORMAT("This is line 1.\nThis is line 2")
-```
-
-> This is line 1.
-
-> This is line 2
-
-
-Numbers can be converted to works suitable for check printing
-
-```foxpro
-? _vfp.String.Format("Please Pay {0:w} dollars", 123.45)
-```
-
-
-> Please Pay One Hundred Twenty Three and 45/100 dollars
-> 
-
-#### Contains
-
-```foxpro
-? _vfp.String.Contains("Astros win 2017 World Series!", "World", nComparisonFlags)
-```
-
-> .T.
-
-#### Compare (Returns which element would go first. -1 for first string, 0 if they're the same, 1 if second string)
-
-```foxpro
-? _vfp.String.Compare("Astros", "Dodgers"[, nComparisonFlags])
-```
-
-> -1
-
-#### Extract (Pull a string from between two delimiters)
-
-```foxpro
-? _vfp.String.Extract("<teams><team>Dodgers</team><team>Astros</team></teams>", "<team>", "</team>", 2, nComparisonFlags)
-```
-
-> Astros
-
-#### IndexOf (Where does a substring appear in a string, if at all?)
-
-```foxpro
-? _vfp.String.IndexOf("Now is the time for all good men to come to the aid of their country.", "time"[, nOccurrence, nComparisonFlags])
-```
-
-> 8
-
-#### LastIndexOf (Where does a substring appear in a string, if at all, starting from the right?)
-
-```foxpro
-? _vfp.String.LastIndexOf("Now is the time for all good men to come to the aid of their country.", "time"[, nOccurrence, nComparisonFlags])
-```
-
-> 8
-
-
-#### Occurs
-
-```foxpro
-? _vfp.String.Occurs("Habush, Habush, and Davis", "Habush"[, nComparisonFlags])
-```
-
-> 2
-
-#### PadLeft, PadCenter, PadRight
-
-
-```foxpro
-? _vfp.String.PadCenter(" HEADER ", "=", 12)
-```
-
-> == HEADER ==
-
-#### Replace (Change substring to another string)
-
-```foxpro
-? _vfp.String.Replace("Now is the time for all good men to come to the aid of their country.", "men", "people"[, nOccurrence, nNumberOfOccurrences, nFlags])
-```
-
-> Now is the time for all good people to come to the aid of their country.
-
-
-#### Split (Divide up a string into an array)
-
-```foxpro
-? _vfp.String.Split(aTeams, "Brewers, Cubs, Cardinals, Pirates, Reds"[, ",",  nFlags])
-```
-
-> 5
-```foxpro
-? aTeams[2]
-```
-> Cubs
-
-#### ToUpper, ToLower
-
-```foxpro
-? _vfp.String.ToUpper("Visual FoxPro Rocks")
-```
->VISUAL FOXPRO ROCKS
-
-
-
-
-
-
-
-# Tests
+### Tests
 
 There are many unit tests in the \tests folder for examples of usage
 
