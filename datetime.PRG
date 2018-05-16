@@ -1,6 +1,6 @@
 DEFINE CLASS DateTime AS StaticVariable OF Static.prg
 
-Value = DATETIME() 
+Value = { :}
 Date = {}
 Day = 0
 DayOfWeek = 0
@@ -20,13 +20,23 @@ Year = 0
 
 PROCEDURE Init
 LPARAMETERS nYear, nMonth, nDay, nHour, nMinute, nSecond
+* Messing around with allowing you to set a value for this class and then you can manipulate it. 
+* Like dtToday = create("DateTime")
+* Then you could do stuff like 
+*   dtToday.Date = date()
+*   ? dtToday.FirstDayOfMonth()
+*   ? dtToday.Add(45)
+
 IF PCOUNT() > 0
 ENDIF
 
 
-PROCEDURE Date_Access
 PROCEDURE Day_Access
+RETURN DAY(This.Date)
+
 PROCEDURE DayOfWeek_Access
+RETURN DOW(This.Date)
+
 PROCEDURE DayOfYear_Access
 PROCEDURE Hour_Access
 PROCEDURE Kind_Access
@@ -39,6 +49,9 @@ PROCEDURE TimeOfDay_Access
 PROCEDURE Today_Access
 PROCEDURE UtcNow_Access
 PROCEDURE Year_Access
+
+PROCEDURE Date_Access
+RETURN EVL(This.Date, DATE())
 
 
 PROCEDURE Now
@@ -82,35 +95,38 @@ RETURN 0
 
 FUNCTION DaysInMonth
 LPARAMETERS iMonth, iYear
-LOCAL iYear, iReturn
-iYear = EVL(iYear, YEAR(DATE()))
-iMonth = EVL(iMonth, MONTH(DATE()))
+LOCAL iYear, iReturn, dDate
+dDate = This.Date
+iYear = EVL(iYear, YEAR(dDate))
+iMonth = EVL(iMonth, MONTH(dDate))
 
 iReturn = This.LastDayOfMonth(iYear, iMonth)-This.FirstDayOfMonth(iYear, iMonth)+1
 RETURN iReturn
 
 
 FUNCTION FirstDayOfMonth(iYear, iMonth)
-LOCAL dDate 
+LOCAL dDate, dReturn
 * Thanks Ed Leafe et al
+dDate = This.Date
 IF PCOUNT()=0
-	dDate = DATE()-DAY(DATE())+1
+	dReturn = dDate-DAY(dDate)+1
 ELSE 
-	dDate = DATE(iYear, iMonth, 1)
+	dReturn = DATE(iYear, iMonth, 1)
 ENDIF
-RETURN dDate
+RETURN dReturn
 
 
 FUNCTION LastDayOfMonth(xYear, iMonth)
-LOCAL dReturn
+LOCAL dReturn, dDate
+dDate = This.Date
 * Thanks Ed Leafe et al
 IF PCOUNT()=1
-	iMonth = MONTH(DATE())
+	iMonth = MONTH(dDate)
 ENDIF 
 
 DO CASE
 	CASE PCOUNT()=0
-		dReturn =  GOMONTH(date(), 1) - day(date())
+		dReturn =  GOMONTH(dDate, 1) - day(dDate)
 	CASE VARTYPE(xYear)='N'
 		dReturn = GOMONTH(DATE(xYear, iMonth,1),+1)-1
 	CASE VARTYPE(xYear)$'DT'
@@ -137,6 +153,7 @@ RETURN .F.
 FUNCTION IsLeapYear
 LPARAMETERS iYear
 * Thanks, wOOdy
+iYear = EVL(iYear, YEAR(This.Date)
 RETURN NOT EMPTY(DATE(iYear,2,29))
 
 
