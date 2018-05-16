@@ -84,6 +84,33 @@ FUNCTION DaysInMonth
 LPARAMETERS iMonth
 RETURN 0
 
+FUNCTION FirstDayOfMonth(iYear, iMonth)
+* Thanks Ed Leafe et al
+IF PCOUNT()=0
+	dDate = DATE()-DAY(DATE())+1
+ELSE 
+	dDate = DATE(iYear, iMonth, 1)
+ENDIF
+RETURN dDate
+
+
+FUNCTION LastDayOfMonth(xYear, iMonth)
+* Thanks Ed Leafe et al
+IF PCOUNT()=1
+	iMonth = MONTH(DATE())
+ENDIF 
+
+DO CASE
+	CASE PCOUNT()=0
+		dReturn =  GOMONTH(date(), 1) - day(date())
+	CASE VARTYPE(xYear)='N'
+		dReturn = GOMONTH(DATE(xYear, iMonth,1),+1)-1
+	CASE VARTYPE(xYear)$'DT'
+		dReturn =  GOMONTH(xYear, 1) - day(xYear)		
+ENDCASE
+RETURN dReturn
+
+
 FUNCTION Equals
 LPARAMETERS dtValue
 RETURN .f.
@@ -101,7 +128,9 @@ RETURN .F.
 
 FUNCTION IsLeapYear
 LPARAMETERS iYear
-RETURN .F.
+* Thanks, wOOdy
+RETURN NOT EMPTY(DATE(iYear,2,29))
+
 
 FUNCTION Parse
 LPARAMETERS cDateTime
