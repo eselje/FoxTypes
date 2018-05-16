@@ -81,10 +81,17 @@ LPARAMETERS dt1, dt2
 RETURN 0
 
 FUNCTION DaysInMonth
-LPARAMETERS iMonth
-RETURN 0
+LPARAMETERS iMonth, iYear
+LOCAL iYear, iReturn
+iYear = EVL(iYear, YEAR(DATE()))
+iMonth = EVL(iMonth, MONTH(DATE()))
+
+iReturn = This.LastDayOfMonth(iYear, iMonth)-This.FirstDayOfMonth(iYear, iMonth)+1
+RETURN iReturn
+
 
 FUNCTION FirstDayOfMonth(iYear, iMonth)
+LOCAL dDate 
 * Thanks Ed Leafe et al
 IF PCOUNT()=0
 	dDate = DATE()-DAY(DATE())+1
@@ -95,6 +102,7 @@ RETURN dDate
 
 
 FUNCTION LastDayOfMonth(xYear, iMonth)
+LOCAL dReturn
 * Thanks Ed Leafe et al
 IF PCOUNT()=1
 	iMonth = MONTH(DATE())
