@@ -1,7 +1,9 @@
+#DEFINE STARTOFTIME {^1970-1-1 00:00:00}
+
 DEFINE CLASS DateTime AS StaticVariable OF Static.prg
 
 Value = { :}
-Date = {}
+Date = { }
 Day = 0
 DayOfWeek = 0
 DayOfYear = 0
@@ -16,7 +18,9 @@ TimeOfDay = 0
 Today = {}
 UtcNow = { :}
 Year = 0 
-
+cTimeZone = ""
+iTimeZoneOffset = .null.
+lDaylightSavings = .f.
 
 PROCEDURE Init
 LPARAMETERS nYear, nMonth, nDay, nHour, nMinute, nSecond
@@ -47,7 +51,10 @@ PROCEDURE Second_Access
 PROCEDURE Ticks_Access
 PROCEDURE TimeOfDay_Access
 PROCEDURE Today_Access
+
 PROCEDURE UtcNow_Access
+RETURN this.getUTCTime()
+
 PROCEDURE Year_Access
 
 PROCEDURE Date_Access
@@ -194,6 +201,92 @@ RETURN .f.
 FUNCTION TryParseExact
 LPARAMETERS cString
 RETURN .f.
+
+
+
+************************************************************************
+*  GetUtcTime
+****************************************
+***  Function: Returns UTC time from local time
+***    Assume:
+***      Pass:
+***    Return:
+************************************************************************
+FUNCTION GetUtcTime(ltTime)
+ 
+IF EMPTY(ltTime)
+    ltTime = DATETIME()
+ENDIF
+ 
+*** Adjust the timezone offset
+RETURN ltTime + (GetTimeZone() * 60)    
+ENDFUNC
+*   GetUtcTime
+
+ 
+FUNCTION FromUtcTime(ltTime)
+*  Returns local time from UTC Time
+RETURN ltTime - (GetTimeZone() * 60)
+ENDFUNC
+ 
+
+FUNCTION iTimeZoneOffset_Access
+** Returns the TimeZone offset from GMT including daylight savings. Result is returned in minutes.
+*** Cache the timezone so this is fast
+IF ISNULL(This.iTimeZoneOffset)
+	LOCAL lcTZ, lnOffset
+	DECLARE integer GetTimeZoneInformation IN Win32API ;
+	   STRING @ TimeZoneStruct
+	   
+	lcTZ = SPACE(256)
+	This.lDaylightSavings = (GetTimeZoneInformation(@lcTZ)=2)
+	
+	lnOffset = This.CharToBin(SUBSTR(lcTZ,1,4),.T.)
+	This.cTimeZone = SUBSTR(STRCONV(lcTZ, 6),IIF(This.lDaylightSavings,45,3),33)
+
+	*** Subtract an hour if daylight savings is active
+	IF This.lDaylightSavings
+	   lnOffset = lnOffset - 60
+	
+	ENDIF
+	This.iTimeZoneOffset = lnOffset  
+ENDIF
+RETURN This.iTimeZoneOffset 
+
+
+FUNCTION CharToBin(lcBinString,llSigned)
+****************************************
+***  Function: Binary Numeric conversion routine. 
+***            Converts DWORD or Unsigned Integer string
+***            to Fox numeric integer value.
+***      Pass: lcBinString -  String that contains the binary data 
+***            llSigned    -  if .T. uses signed conversion
+***                           otherwise value is unsigned (DWORD)
+***    Return: Fox number
+************************************************************************
+LOCAL m.i, lnWord
+lnWord = 0
+FOR m.i = 1 TO LEN(lcBinString)
+	lnWord = lnWord + (ASC(SUBSTR(lcBinString, m.i, 1)) * (2 ^ (8 * (m.i - 1))))
+ENDFOR
+IF llSigned AND lnWord > 0x80000000
+	lnWord = lnWord - 1 - 0xFFFFFFFF
+ENDIF
+RETURN lnWord
+
+
+FUNCTION TimeToUnix
+LPARAMETERS tcDateTime
+tcDateTime=EVL(tcDateTime, This.Value)
+tcDateTime=EVL(tcDateTime, This.Now)
+RETURN tcDateTime - STARTOFTIME
+
+
+FUNCTION UnixToTime
+LPARAMETERS tnUnixTime
+tnUnixTime = EVL(tnUnixTime,0)
+RETURN STARTOFTIME + tnUnixTime
+
 
  
 ENDDEFINE
