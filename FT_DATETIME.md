@@ -2,75 +2,76 @@
 
 Replicates the functionality of C#'s DATETIME Static Class
 
-### To access individual properties of the DateTime:
-* Date_Access
-* Day_Access
-* DayOfWeek_Access
-* DayOfYear_Access
-* Hour_Access
-* Kind_Access
-* Millisecond_Access
-* Minute_Access
-* Month_Access
-* Second_Access
-* Ticks_Access
-* TimeOfDay_Access
-* Today_Access
-* UtcNow_Access
-* Year_Access
+### Properties
+* Date
+* Day
+* DayOfWeek
+* DayOfYear
+* Hour
+* Kind
+* Millisecond
+* Minute
+* Month
+* Second
+* Ticks
+* TimeOfDay
+* Today
+* Year
 
-## Functions
+### Local Time Properties
+* cTimeZone         *(String of Daylight / Standard Time Zone)*
+* iTimeZoneOffset   *(Number of minutes from GMT)*
+* lDaylightSavings  *(Currently in daylight savings time mode)*
+* UtcNow            *(Current time in UTC)*
+* Now               *(Current time in local time)*
 
-### Now()
-### Add(cTimeSpan)
-### AddDays(iDays)
-### AddHours(nHours)
-### AddMilliseconds(iMilliseconds)
+*_Access methods exist to return individual properties of the DateTime:*
 
+## Functions on the stored Date value
 
-### AddMinutes( iMonths)
-
-### AddSeconds( iSeconds)
-
-### AddTicks( iTicks)
-
-### AddYears( iYears)
-
-### Compare( dt1, dt2 )
-
-### DaysInMonth( iMonth)
-
-### Equals( dtValue)
-
-### GetDateTimeFormats( cFormat)
-
-### GetType()
-
-### IsDaylightSavingTime()
+*  Add(cTimeSpan)
+*  AddDays(iDays)
+*  AddHours(nHours)
+*  AddMilliseconds(iMilliseconds)
+*  AddMinutes( iMonths)
+*  AddSeconds( iSeconds)
+*  AddTicks( iTicks)
+*  AddYears( iYears)
+*  Compare( dt1, dt2 )
+*  Equals( dtValue)
+*  Subtract( xTime) && Either timespan or datetime
 
 
+*  DaysInMonth( iMonth)
 
-### IsLeapYear( iYear)
+*  FromUTCTime(dt) *Returns UTC time from local time*
+*  GetUTCTime(dt)  *Returns local time from UTC time*
+*  GetDateTimeFormats( cFormat)
+*  GetType()
 
-### Parse( cDateTime)
+*  IsDaylightSavingTime()   *(Same as lDaylightSavings value)*
 
-### Subtract( xTime) && Either timespan or datetime
+*  IsLeapYear( iYear)
 
-### ToLocalTime()
+*  Parse( cDateTime)
+*  TimeToUnix(dt)
+*Converts a datetime to # of seconds since 1/1/1970*
 
-### ToLongDateString()
-### ToLongTimeString()
-
-### ToShortDateString()
-
-### ToShortTimeString()
-
-### ToString( cFormat, cString)
-
-### ToUniversalTime()
-
-### TryParse( cString)
+*  UnixToTime(unixtime)  
+*Converts # of seconds since 1/1/1970 to a FoxPro datetime*
 
 
-### TryParseExact( cString)
+
+### These will use the FoxTypes STRING class to convert
+*  ToLocalTime()
+*  ToLongDateString()
+*  ToLongTimeString()
+*  ToShortDateString()
+*  ToShortTimeString()
+*  ToString( cFormat, cString)
+*  ToUniversalTime()
+*  TryParse( cString)
+*  TryParseExact( cString)
+
+
 

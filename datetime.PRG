@@ -160,7 +160,7 @@ RETURN .F.
 FUNCTION IsLeapYear
 LPARAMETERS iYear
 * Thanks, wOOdy
-iYear = EVL(iYear, YEAR(This.Date)
+iYear = EVL(iYear, YEAR(This.Date))
 RETURN NOT EMPTY(DATE(iYear,2,29))
 
 
@@ -254,7 +254,7 @@ ENDIF
 RETURN This.iTimeZoneOffset 
 
 
-FUNCTION CharToBin(lcBinString,llSigned)
+PROTECTED FUNCTION CharToBin(lcBinString,llSigned)
 ****************************************
 ***  Function: Binary Numeric conversion routine. 
 ***            Converts DWORD or Unsigned Integer string
