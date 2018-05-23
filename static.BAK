@@ -13,8 +13,6 @@ DEFINE CLASS StaticVariable AS Custom
 			cString = IIF(EMPTY(xValue), "", TTOC(xValue, 1))
 		CASE INLIST(cVarType, 'D')
 			cString = IIF(EMPTY(xValue), "", DTOC(xValue))
-		OTHERWISE
-			ERROR 9, "Type " + cVarType + " unsupported."
 	ENDCASE
 	RETURN cString
 		
