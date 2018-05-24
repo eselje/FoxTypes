@@ -154,7 +154,7 @@ FUNCTION GetType
 RETURN "T"
 
 FUNCTION IsDaylightSavingTime()
-RETURN .F.
+RETURN This.lDaylightSavings
 
 
 FUNCTION IsLeapYear
@@ -213,7 +213,6 @@ RETURN .f.
 ***    Return:
 ************************************************************************
 FUNCTION GetUtcTime(ltTime)
- 
 IF EMPTY(ltTime)
     ltTime = DATETIME()
 ENDIF

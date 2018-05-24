@@ -33,9 +33,12 @@ DEFINE CLASS String AS StaticVariable OF Static.prg
 		LOCAL nCount, cCount, cReturn, cSearch, cFormat
 		cReturn = cString
 		FOR nCount = 1 TO OCCURS("{", cString)
-			cSearch = STREXTRACT(cString, "{", "}", nCount, 4)
-			cFormat = STREXTRACT(cSearch, ":", "}")
+			cSearch = This.Extract(cString, "{", "}", nCount, 4)
+			cFormat = This.Extract(cSearch, ":", "}")
 			cCount  = CHRTRAN(STRTRAN(cSearch, cFormat,""), "{:}","")
+			IF TRANSFORM(VAL(cCount))!= cCount && A lone { for example
+				LOOP
+			ENDIF 
 			IF EMPTY(cFormat)
 				cReturn = STRTRAN(cReturn, cSearch, TRANSFORM(EVALUATE("vPara"+cCount)) )
 			ELSE
@@ -376,6 +379,8 @@ DEFINE CLASS String AS StaticVariable OF Static.prg
 	 
 	FUNCTION Extract
 	LPARAMETERS cSearchExpression, cBeginDelim, cEndDelim, nOccurrence, nFlags
+	nOccurrence=EVL(nOccurrence,1)
+	nFlags=EVL(nFlags,0)
 	RETURN STREXTRACT(cSearchExpression, cBeginDelim, cEndDelim, nOccurrence, nFlags)
 	
 	FUNCTION Split
