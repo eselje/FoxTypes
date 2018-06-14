@@ -2,6 +2,7 @@
 
 DEFINE CLASS DateTime AS StaticVariable OF Static.prg
 
+PROTECTED oString 
 Value = { :}
 Date = { }
 Day = 0
@@ -21,6 +22,8 @@ Year = 0
 cTimeZone = ""
 iTimeZoneOffset = .null.
 lDaylightSavings = .f.
+oString = .null.
+
 
 PROCEDURE Init
 LPARAMETERS nYear, nMonth, nDay, nHour, nMinute, nSecond
@@ -30,7 +33,6 @@ LPARAMETERS nYear, nMonth, nDay, nHour, nMinute, nSecond
 *   dtToday.Date = date()
 *   ? dtToday.FirstDayOfMonth()
 *   ? dtToday.Add(45)
-
 IF PCOUNT() > 0
 ENDIF
 
@@ -187,8 +189,11 @@ FUNCTION ToShortTimeString
 RETURN ""
 
 FUNCTION ToString
-LPARAMETERS cFormat, cString
-RETURN ""
+LPARAMETERS cFormat
+cFormat=EVL(cFormat,'d')
+LOCAL cString
+cString = This.oString.Format("{0:"+cFormat+"}", This.Value)
+RETURN cString
 
 FUNCTION ToUniversalTime
 RETURN { :}
@@ -286,6 +291,13 @@ LPARAMETERS tnUnixTime
 tnUnixTime = EVL(tnUnixTime,0)
 RETURN STARTOFTIME + tnUnixTime
 
-
+FUNCTION oString_Access
+IF ISNULL(This.oString)
+	IF ATC("String",SET("PROC"))=0
+		SET PROCEDURE TO String ADDITIVE
+	ENDIF
+	This.oString=CREATEOBJECT("String")
+ENDIF 
+RETURN this.oString
  
 ENDDEFINE
