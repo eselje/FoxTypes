@@ -39,15 +39,14 @@ Replicates the functionality of C#'s DATETIME Static Class
 *  AddYears( iYears)
 *  Compare( dt1, dt2 )
 *  Equals( dtValue)
-*  Subtract( xTime) && Either timespan or datetime
-
+*  Subtract(xTime) && Either timespan or datetime or integer (minutes)
 
 *  DaysInMonth( iMonth)
 
 *  FromUTCTime(dt) *Returns UTC time from local time*
 *  GetUTCTime(dt)  *Returns local time from UTC time*
-*  GetDateTimeFormats( cFormat)
-*  GetType()
+*  GetDateTimeFormats() *Returns array of dates in all supported formatting codes*
+*  GetType()        *Returns 'datetime'*
 
 *  IsDaylightSavingTime()   *(Same as lDaylightSavings value)*
 
@@ -60,16 +59,19 @@ Replicates the functionality of C#'s DATETIME Static Class
 *  UnixToTime(unixtime)  
 *Converts # of seconds since 1/1/1970 to a FoxPro datetime*
 
+*  ToLocalTime()    
+*Value in UTC plus the UTF Offset
 
-
-### These will use the FoxTypes STRING class to convert
-*  ToLocalTime()
-*  ToLongDateString()
-*  ToLongTimeString()
-*  ToShortDateString()
-*  ToShortTimeString()
-*  ToString( cFormat, cString)
 *  ToUniversalTime()
+
+
+### These use the FoxTypes STRING class to convert
+*  ToString([cFormat])  Default format is 'G' 
+*  ToLongDateString()   Equivalent to format of 'D'
+*  ToLongTimeString()   Equivalent to format of 'T'
+*  ToShortDateString()  Equivalent to format of 'd'
+*  ToShortTimeString()  Equivalent to format of 't'
+
 *  TryParse( cString)
 *  TryParseExact( cString)
 

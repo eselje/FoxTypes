@@ -149,11 +149,20 @@ LPARAMETERS dtValue
 RETURN .f.
 
 FUNCTION GetDateTimeFormats
-LPARAMETERS cFormat
-RETURN ""
+LPARAMETERS aResult, cTypes
+cTypes = EVL(cTypes,"dDfFgGmorstTuUy")
+DIMENSION aResult[LEN(cTypes),2]
+LOCAL i, cType
+FOR i = 1 TO LEN(cTypes)
+	cType = SUBSTR(cTypes,i,1)
+	aResult[i,2]=cType
+	aResult[i,1]=This.ToString(cType)
+NEXT
+RETURN aResult
+
 
 FUNCTION GetType
-RETURN "T"
+RETURN This.Class
 
 FUNCTION IsDaylightSavingTime()
 RETURN This.lDaylightSavings
@@ -172,25 +181,48 @@ RETURN { :}
 
 FUNCTION Subtract
 LPARAMETERS xTime && Either timespan or datetime
+LOCAL tResult
+tResult = This.Value
+DO CASE
+	CASE VARTYPE(xTime)='T'
+	CASE VARTYPE(xTime)='D'
+	CASE VARTYPE(xTime)='I'	&& Minutes? 
+		tResult = tResult - xTime
+	OTHERWISE && Parse TimeSpan
+ENDCASE 
+	
+RETURN tResult
+
 
 FUNCTION ToLocalTime
-RETURN { :}
+LPARAMETERS iUTCOffset
+LOCAL ltTime
+iUTCOffset=EVL(iUTCOffset,0)
+*  Returns local time from UTC Time
+IF iUTCOffset=0
+	tReturn = This.FromUtcTime(This.Value)
+ELSE
+ 	tReturn = This.Subtract((This.iTimeZoneOffset-iUTFOffset)*60)
+ENDIF 
+RETURN tReturn
+ENDFUNC
+
 
 FUNCTION ToLongDateString
-RETURN ""
+RETURN This.ToString('D')
 
 FUNCTION ToLongTimeString
-RETURN ""
+RETURN This.ToString('T')
 
 FUNCTION ToShortDateString
-RETURN ""
+RETURN This.ToString('d')
 
 FUNCTION ToShortTimeString
-RETURN ""
+RETURN This.ToString('t')
 
 FUNCTION ToString
 LPARAMETERS cFormat
-cFormat=EVL(cFormat,'d')
+cFormat=EVL(cFormat,'G')
 LOCAL cString
 cString = This.oString.Format("{0:"+cFormat+"}", This.Value)
 RETURN cString
@@ -218,19 +250,16 @@ RETURN .f.
 ***    Return:
 ************************************************************************
 FUNCTION GetUtcTime(ltTime)
-IF EMPTY(ltTime)
-    ltTime = DATETIME()
-ENDIF
- 
+ltTime = EVL(ltTime, EVL(This.Value, DATETIME()))
 *** Adjust the timezone offset
-RETURN ltTime + (GetTimeZone() * 60)    
+RETURN ltTime + (This.iTimeZoneOffset * 60)    
 ENDFUNC
 *   GetUtcTime
 
- 
 FUNCTION FromUtcTime(ltTime)
 *  Returns local time from UTC Time
-RETURN ltTime - (GetTimeZone() * 60)
+ltTime = EVL(ltTime, This.Value)
+RETURN ltTime - (This.iTimeZoneOffset * 60)
 ENDFUNC
  
 
@@ -300,4 +329,17 @@ IF ISNULL(This.oString)
 ENDIF 
 RETURN this.oString
  
+PROTECTED FUNCTION Value_Access
+IF EMPTY(This.Value)
+	This.Value=DATETIME()
+ENDIF
+RETURN This.Value
+
+PROTECTED FUNCTION Value_Assign
+LPARAMETERS dtValue
+LOCAL cType
+cType = VARTYPE(dtValue)
+IF cType $ 'DT'
+	This.Value=dtValue
+ENDIF
 ENDDEFINE
